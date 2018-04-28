@@ -16,6 +16,7 @@ namespace Ams2PrototypeProject.Controllers {
 	/// 
 	/// The Vehicle to Asset is a one-to-one relationship.
 	/// </summary>
+	[EnableCors(origins: "*", headers: "*", methods: "*")]
 	public class VehiclesController : ApiController {
 
 		private AmsDbContext db = new AmsDbContext();

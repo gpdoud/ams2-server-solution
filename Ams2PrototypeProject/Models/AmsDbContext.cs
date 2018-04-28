@@ -15,5 +15,6 @@ namespace Ams2PrototypeProject.Models {
 		public DbSet<Vehicle> Vehicles { get; set; }
 		public DbSet<Logger> Loggers { get; set; }
 		public DbSet<SystemConfig> SystemConfig { get; set; }
+		public DbSet<User> Users { get; set; }
 	}
 }

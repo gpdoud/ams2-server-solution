@@ -101,3 +101,7 @@ C:\repos\Asset-Management-System-Repos\ams2\ams2-server-solution\Ams2PrototypePr
 C:\repos\Asset-Management-System-Repos\ams2\ams2-server-solution\Ams2PrototypeProject\obj\Debug\Ams2PrototypeProject.pdb
 C:\repos\Asset-Management-System-Repos\ams2\ams2-server-solution\Ams2PrototypeProject\obj\Debug\Ams2PrototypeProject.Migrations.initialization.resources
 C:\repos\Asset-Management-System-Repos\ams2\ams2-server-solution\Ams2PrototypeProject\obj\Debug\ams2-server-project.csproj.GenerateResource.cache
+C:\repos\Asset-Management-System-Repos\ams2\ams2-server-solution\Ams2PrototypeProject\obj\Debug\Ams2PrototypeProject.Migrations.addeduser.resources
+C:\repos\Asset-Management-System-Repos\ams2\ams2-server-solution\Ams2PrototypeProject\bin\System.Web.Cors.dll
+C:\repos\Asset-Management-System-Repos\ams2\ams2-server-solution\Ams2PrototypeProject\bin\System.Web.Http.Cors.dll
+C:\repos\Asset-Management-System-Repos\ams2\ams2-server-solution\Ams2PrototypeProject\bin\System.Web.Http.Cors.xml

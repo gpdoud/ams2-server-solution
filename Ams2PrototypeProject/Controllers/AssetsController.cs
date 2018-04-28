@@ -10,6 +10,7 @@ using System.Web.Http;
 
 namespace Ams2PrototypeProject.Controllers {
 
+	[EnableCors(origins: "*", headers: "*", methods: "*")]
 	public class AssetsController : ApiController {
 
 		private AmsDbContext db = new AmsDbContext();
