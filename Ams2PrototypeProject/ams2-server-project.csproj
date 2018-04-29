@@ -189,6 +189,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\AddressesController.cs" />
     <Compile Include="Controllers\AssetsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoggerController.cs" />
@@ -206,7 +207,16 @@
     <Compile Include="Migrations\201804281250257_added user.Designer.cs">
       <DependentUpon>201804281250257_added user.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804291111288_Added Active, DateCreated, DateUpdated to Vehicle model.cs" />
+    <Compile Include="Migrations\201804291111288_Added Active, DateCreated, DateUpdated to Vehicle model.Designer.cs">
+      <DependentUpon>201804291111288_Added Active, DateCreated, DateUpdated to Vehicle model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804291304159_added Address and FK to Address in Asset.cs" />
+    <Compile Include="Migrations\201804291304159_added Address and FK to Address in Asset.Designer.cs">
+      <DependentUpon>201804291304159_added Address and FK to Address in Asset.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Address.cs" />
     <Compile Include="Models\AmsDbContext.cs" />
     <Compile Include="Models\Asset.cs" />
     <Compile Include="Models\SystemConfig.cs" />
@@ -293,6 +303,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804281250257_added user.resx">
       <DependentUpon>201804281250257_added user.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804291111288_Added Active, DateCreated, DateUpdated to Vehicle model.resx">
+      <DependentUpon>201804291111288_Added Active, DateCreated, DateUpdated to Vehicle model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804291304159_added Address and FK to Address in Asset.resx">
+      <DependentUpon>201804291304159_added Address and FK to Address in Asset.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

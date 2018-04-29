@@ -1,8 +1,6 @@
 ﻿using Ams2PrototypeProject.Models;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity.Infrastructure;
-using System.Data.Entity.Validation;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -10,54 +8,53 @@ using System.Web.Http;
 using System.Web.Http.Cors;
 
 namespace Ams2PrototypeProject.Controllers {
-
 	[EnableCors(origins: "*", headers: "*", methods: "*")]
-	public class AssetsController : ApiController {
+	public class AddressesController : ApiController {
 
 		private AmsDbContext db = new AmsDbContext();
 
 		[HttpGet]
 		[ActionName("List")]
-		public IEnumerable<Asset> GetAssets() {
-			return db.Assets.ToList();
+		public IEnumerable<Address> GetAddresses() {
+			return db.Addresses.ToList();
 		}
 
 		[HttpGet]
 		[ActionName("Get")]
-		public Asset GetAssets(int? id) {
+		public Address GetAddress(int? id) {
 			if (id == null) return null;
-			var asset = db.Assets.Find(id);
-			if (asset == null) return null;
-			return asset;
+			var address = db.Addresses.Find(id);
+			return address;
 		}
 
 		[HttpPost]
 		[ActionName("Create")]
-		public bool PutAsset([FromBody] Asset asset) {
-			if (asset == null) return false;
+		public bool AddAddress([FromBody] Address address) {
+			if (address == null) return false;
 			if (!ModelState.IsValid) return false;
-			db.Assets.Add(asset);
+			db.Addresses.Add(address);
 			return SaveChanges();
 		}
 
 		[HttpPost]
 		[ActionName("Change")]
-		public bool PostAsset([FromBody] Asset asset) {
-			if (asset == null) return false;
+		public bool ChgAddress([FromBody] Address address) {
+			if (address == null) return false;
 			if (!ModelState.IsValid) return false;
-			var asset2 = db.Assets.Find(asset.Id);
-			if (asset2 == null) return false;
-			asset2.Copy(asset);
+			var address2 = db.Addresses.Find(address.Id);
+			if (address2 == null) return false;
+			address2.Copy(address);
 			return SaveChanges();
 		}
 
 		[HttpPost]
 		[ActionName("Remove")]
-		public bool DeleteAsset([FromBody] Asset asset) {
-			if (asset == null) return false;
-			var asset2 = db.Assets.Find(asset.Id);
-			if (asset2 == null) return false;
-			db.Assets.Remove(asset2);
+		public bool RemAddress([FromBody] Address address) {
+			if (address == null) return false;
+			if (!ModelState.IsValid) return false;
+			var address2 = db.Addresses.Find(address.Id);
+			if (address2 == null) return false;
+			db.Addresses.Remove(address2);
 			return SaveChanges();
 		}
 

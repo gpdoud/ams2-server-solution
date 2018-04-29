@@ -20,6 +20,8 @@ namespace Ams2PrototypeProject.Models {
 		public DateTime? RetiredDate { get; set; }
 		public DateTime? SurplusDate { get; set; }
 		public decimal? ResidualValue { get; set; }
+		public int? AddressId { get; set; }
+		public virtual Address Address { get; set; }
 
 		public void Copy(Asset asset) {
 			this.Code = asset.Code;
@@ -34,6 +36,7 @@ namespace Ams2PrototypeProject.Models {
 			this.RetiredDate = asset.RetiredDate;
 			this.SurplusDate = asset.SurplusDate;
 			this.ResidualValue = asset.ResidualValue;
+			this.AddressId = asset.AddressId;
 		}
 
 		public Asset() {

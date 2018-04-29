@@ -11,9 +11,10 @@ namespace Ams2PrototypeProject.Models {
 		public AmsDbContext() : base("name=AmsDb") {
 		}
 
+		public DbSet<Address> Addresses { get; set; }
 		public DbSet<Asset> Assets { get; set; }
-		public DbSet<Vehicle> Vehicles { get; set; }
 		public DbSet<Logger> Loggers { get; set; }
+		public DbSet<Vehicle> Vehicles { get; set; }
 		public DbSet<SystemConfig> SystemConfig { get; set; }
 		public DbSet<User> Users { get; set; }
 	}

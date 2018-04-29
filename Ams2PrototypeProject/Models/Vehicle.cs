@@ -13,6 +13,9 @@ namespace Ams2PrototypeProject.Models {
 		public string Make { get; set; }
 		public string Model { get; set; }
 		public int? Year { get; set; }
+		public bool Active { get; set; }
+		public DateTime DateCreated { get; set; } = DateTime.Now;
+		public DateTime? DateUpdated { get; set; }
 
 		public virtual Asset Asset { get; set; }
 
@@ -22,6 +25,9 @@ namespace Ams2PrototypeProject.Models {
 			this.Make = vehicle.Make;
 			this.Model = vehicle.Model;
 			this.Year = vehicle.Year;
+			this.Active = vehicle.Active;
+			this.DateCreated = vehicle.DateCreated;
+			this.DateUpdated = DateTime.Now;
 		}
 
 		public Vehicle() {
