@@ -1,4 +1,4 @@
-﻿using Ams2PrototypeProject.Models;
+﻿using Ams2.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
 
-namespace Ams2PrototypeProject.Controllers {
+namespace Ams2.Controllers {
 	[EnableCors(origins: "*", headers: "*", methods: "*")]
 	public class AddressesController : ApiController {
 

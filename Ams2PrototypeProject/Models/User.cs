@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace Ams2PrototypeProject.Models {
+namespace Ams2.Models {
 	public class User {
 		public int Id { get; set; }
 		public string Username { get; set; }

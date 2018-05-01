@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace Ams2PrototypeProject.Areas.HelpPage.ModelDescriptions
+namespace Ams2.Areas.HelpPage.ModelDescriptions
 {
     public interface IModelDocumentationProvider
     {

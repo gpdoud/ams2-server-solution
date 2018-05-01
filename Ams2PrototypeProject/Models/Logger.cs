@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Ams2PrototypeProject.Utility;
+using Ams2.Utility;
 
-namespace Ams2PrototypeProject.Models {
+namespace Ams2.Models {
 
 	public class Logger {
 

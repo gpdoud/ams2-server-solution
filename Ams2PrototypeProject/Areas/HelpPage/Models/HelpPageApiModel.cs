@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Net.Http.Headers;
 using System.Web.Http.Description;
-using Ams2PrototypeProject.Areas.HelpPage.ModelDescriptions;
+using Ams2.Areas.HelpPage.ModelDescriptions;
 
-namespace Ams2PrototypeProject.Areas.HelpPage.Models
+namespace Ams2.Areas.HelpPage.Models
 {
     /// <summary>
     /// The model that represents an API displayed on the help page.

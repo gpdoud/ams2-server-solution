@@ -6,7 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
 
-namespace Ams2PrototypeProject.Controllers {
+namespace Ams2.Controllers {
 
 	[EnableCors(origins: "*", headers: "*", methods: "*")]
 	public class LoggerController : ApiController {

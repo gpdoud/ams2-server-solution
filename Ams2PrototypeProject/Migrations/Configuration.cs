@@ -1,18 +1,18 @@
-namespace Ams2PrototypeProject.Migrations
+namespace Ams2.Migrations
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Ams2PrototypeProject.Models.AmsDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<Ams2.Models.AmsDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(Ams2PrototypeProject.Models.AmsDbContext context)
+        protected override void Seed(Ams2.Models.AmsDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

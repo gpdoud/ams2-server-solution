@@ -4,7 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
-namespace Ams2PrototypeProject.Models {
+namespace Ams2.Models {
 
 	public class AmsDbContext : DbContext {
 

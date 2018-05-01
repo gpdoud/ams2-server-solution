@@ -1,4 +1,4 @@
-namespace Ams2PrototypeProject.Migrations
+namespace Ams2.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;

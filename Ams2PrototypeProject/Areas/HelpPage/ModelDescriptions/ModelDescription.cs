@@ -1,6 +1,6 @@
 using System;
 
-namespace Ams2PrototypeProject.Areas.HelpPage.ModelDescriptions
+namespace Ams2.Areas.HelpPage.ModelDescriptions
 {
     /// <summary>
     /// Describes a type model.

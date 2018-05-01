@@ -6,7 +6,7 @@ using System.Web.Http;
 using System.Web.Http.Cors;
 //using System.Web.Http.Cors;
 
-namespace Ams2PrototypeProject {
+namespace Ams2 {
 	public static class WebApiConfig {
 		public static void Register(HttpConfiguration config) {
 			// Web API configuration and services

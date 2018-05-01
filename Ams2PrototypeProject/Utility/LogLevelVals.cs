@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Ams2PrototypeProject.Utility {
+namespace Ams2.Utility {
 
 	public struct LogLevelVals {
 		public static string Fatal = "Fatal";

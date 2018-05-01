@@ -1,10 +1,10 @@
 using System;
 using System.Web.Http;
 using System.Web.Mvc;
-using Ams2PrototypeProject.Areas.HelpPage.ModelDescriptions;
-using Ams2PrototypeProject.Areas.HelpPage.Models;
+using Ams2.Areas.HelpPage.ModelDescriptions;
+using Ams2.Areas.HelpPage.Models;
 
-namespace Ams2PrototypeProject.Areas.HelpPage.Controllers
+namespace Ams2.Areas.HelpPage.Controllers
 {
     /// <summary>
     /// The controller that will handle requests for the help page.
