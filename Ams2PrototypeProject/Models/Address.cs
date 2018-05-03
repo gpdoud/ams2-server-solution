@@ -14,6 +14,9 @@ namespace Ams2.Models {
 		public string City { get; set; }
 		public string State { get; set; }
 		public string Zipcode { get; set; }
+		public bool Active { get; set; }
+		public DateTime DateCreated { get; set; } = DateTime.Now;
+		public DateTime? DateUpdated { get; set; }
 
 		public Address(string Code, string Name, string Address1, string Address2, string Address3,
 						string City, string State, string Zipcode) {
@@ -38,6 +41,9 @@ namespace Ams2.Models {
 			this.City = a.City;
 			this.State = a.State;
 			this.Zipcode = a.Zipcode;
+			this.Active = a.Active;
+			this.DateCreated = a.DateCreated;
+			this.DateUpdated = a.DateUpdated;
 		}
 	}
 }

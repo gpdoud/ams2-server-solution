@@ -13,6 +13,7 @@ namespace Ams2.Models {
 
 		public DbSet<Address> Addresses { get; set; }
 		public DbSet<Asset> Assets { get; set; }
+		public DbSet<Equipment> Equipments { get; set; }
 		public DbSet<Logger> Loggers { get; set; }
 		public DbSet<Vehicle> Vehicles { get; set; }
 		public DbSet<SystemConfig> SystemConfig { get; set; }

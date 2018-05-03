@@ -8,6 +8,25 @@ namespace Ams2.Migrations
         public override void Up()
         {
             CreateTable(
+                "dbo.Addresses",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Code = c.String(),
+                        Name = c.String(),
+                        Address1 = c.String(),
+                        Address2 = c.String(),
+                        Address3 = c.String(),
+                        City = c.String(),
+                        State = c.String(),
+                        Zipcode = c.String(),
+                        Active = c.Boolean(nullable: false),
+                        DateCreated = c.DateTime(nullable: false),
+                        DateUpdated = c.DateTime(),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
                 "dbo.Assets",
                 c => new
                     {
@@ -24,8 +43,11 @@ namespace Ams2.Migrations
                         RetiredDate = c.DateTime(),
                         SurplusDate = c.DateTime(),
                         ResidualValue = c.Decimal(precision: 18, scale: 2),
+                        AddressId = c.Int(),
                     })
-                .PrimaryKey(t => t.Id);
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Addresses", t => t.AddressId)
+                .Index(t => t.AddressId);
             
             CreateTable(
                 "dbo.Loggers",
@@ -53,6 +75,23 @@ namespace Ams2.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
+                "dbo.Users",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Username = c.String(),
+                        Password = c.String(),
+                        Firstname = c.String(),
+                        Lastname = c.String(),
+                        Phone = c.String(),
+                        Email = c.String(),
+                        Active = c.Boolean(nullable: false),
+                        DateCreated = c.DateTime(nullable: false),
+                        DateUpdated = c.DateTime(),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
                 "dbo.Vehicles",
                 c => new
                     {
@@ -62,6 +101,9 @@ namespace Ams2.Migrations
                         Make = c.String(),
                         Model = c.String(),
                         Year = c.Int(),
+                        Active = c.Boolean(nullable: false),
+                        DateCreated = c.DateTime(nullable: false),
+                        DateUpdated = c.DateTime(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Assets", t => t.AssetId, cascadeDelete: true)
@@ -72,11 +114,15 @@ namespace Ams2.Migrations
         public override void Down()
         {
             DropForeignKey("dbo.Vehicles", "AssetId", "dbo.Assets");
+            DropForeignKey("dbo.Assets", "AddressId", "dbo.Addresses");
             DropIndex("dbo.Vehicles", new[] { "AssetId" });
+            DropIndex("dbo.Assets", new[] { "AddressId" });
             DropTable("dbo.Vehicles");
+            DropTable("dbo.Users");
             DropTable("dbo.SystemConfigs");
             DropTable("dbo.Loggers");
             DropTable("dbo.Assets");
+            DropTable("dbo.Addresses");
         }
     }
 }

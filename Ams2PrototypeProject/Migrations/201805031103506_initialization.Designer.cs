@@ -13,7 +13,7 @@ namespace Ams2.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201804271742047_initialization"; }
+            get { return "201805031103506_initialization"; }
         }
         
         string IMigrationMetadata.Source

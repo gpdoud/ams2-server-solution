@@ -7,13 +7,13 @@ namespace Ams2.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class addeduser : IMigrationMetadata
+    public sealed partial class AddedEquipmenttocontext : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(addeduser));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddedEquipmenttocontext));
         
         string IMigrationMetadata.Id
         {
-            get { return "201804281250257_added user"; }
+            get { return "201805031110146_Added Equipment to context"; }
         }
         
         string IMigrationMetadata.Source

@@ -32,6 +32,7 @@ namespace Ams2.Controllers {
 		public bool AddAddress([FromBody] Address address) {
 			if (address == null) return false;
 			if (!ModelState.IsValid) return false;
+			address.DateCreated = DateTime.Now;
 			db.Addresses.Add(address);
 			return SaveChanges();
 		}
@@ -44,6 +45,7 @@ namespace Ams2.Controllers {
 			var address2 = db.Addresses.Find(address.Id);
 			if (address2 == null) return false;
 			address2.Copy(address);
+			address2.DateUpdated = DateTime.Now;
 			return SaveChanges();
 		}
 
