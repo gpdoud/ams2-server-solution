@@ -53,6 +53,7 @@ namespace Ams2.Controllers {
 			var vehicle2 = db.Equipments.Find(equipment.Id);
 			if (vehicle2 == null) return false;
 			vehicle2.Copy(equipment);
+			vehicle2.Asset = null;
 			return SaveChanges();
 		}
 
