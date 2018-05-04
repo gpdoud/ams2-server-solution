@@ -10,18 +10,21 @@ namespace Ams2.Models {
 	public class Equipment {
 		public int Id { get; set; }
 		public int AssetId { get; set; }
-		public Asset Asset { get; set; }
-		public string Name { get; set; }
+		public string Description { get; set; }
+		public string SerialNumber { get; set; }
 		public bool Active { get; set; }
 		public DateTime DateCreated { get; set; } = DateTime.Now;
 		public DateTime? DateUpdated { get; set; }
 
+		public virtual Asset Asset { get; set; }
+
 		public Equipment() { }
 
-		public Equipment(int AssetId, Asset Asset, string Name) {
+		public Equipment(int AssetId, Asset Asset, string Description, string SerialNumber) {
 			this.AssetId = AssetId;
 			this.Asset = Asset;
-			this.Name = Name;
+			this.Description = Description;
+			this.SerialNumber = SerialNumber;
 			this.Active = true;
 			this.DateCreated = DateTime.Now;
 		}
@@ -29,7 +32,8 @@ namespace Ams2.Models {
 		public void Copy(Equipment e) {
 			this.AssetId = e.AssetId;
 			this.Asset = e.Asset;
-			this.Name = e.Name;
+			this.Description = e.Description;
+			this.SerialNumber = e.SerialNumber;
 			this.Active = e.Active;
 			this.DateCreated = e.DateCreated;
 			this.DateUpdated = e.DateUpdated;

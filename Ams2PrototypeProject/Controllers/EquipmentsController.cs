@@ -16,13 +16,13 @@ namespace Ams2.Controllers {
 
 		[HttpGet]
 		[ActionName("List")]
-		public IEnumerable<Equipment> GetVehicles() {
+		public IEnumerable<Equipment> GetEquipment() {
 			return db.Equipments.ToList();
 		}
 
 		[HttpGet]
 		[ActionName("Get")]
-		public Equipment GetVehicle(int? id) {
+		public Equipment GetEquipment(int? id) {
 			if (id == null) return null;
 			var equipment = db.Equipments.Find(id);
 			return equipment; // may be null 
@@ -30,7 +30,7 @@ namespace Ams2.Controllers {
 
 		[HttpPost]
 		[ActionName("Create")]
-		public bool PutVehicle([FromBody] Equipment equipment) {
+		public bool CreateEquipment([FromBody] Equipment equipment) {
 			if (equipment == null) return false;
 			if (!ModelState.IsValid) return false;
 			// add the asset first
@@ -43,7 +43,7 @@ namespace Ams2.Controllers {
 
 		[HttpPost]
 		[ActionName("Change")]
-		public bool PostVehicle([FromBody] Equipment equipment) {
+		public bool ChangeEquipment([FromBody] Equipment equipment) {
 			if (equipment == null) return false;
 			if (!ModelState.IsValid) return false;
 			var asset2 = db.Assets.Find(equipment.Asset.Id);
@@ -58,7 +58,7 @@ namespace Ams2.Controllers {
 
 		[HttpPost]
 		[ActionName("Remove")]
-		public bool DeleteVehicle([FromBody] Equipment equipment) {
+		public bool RemoveEquipment([FromBody] Equipment equipment) {
 			if (equipment == null) return false;
 			var vehicle2 = db.Equipments.Find(equipment.Id);
 			if (vehicle2 == null) return false;

@@ -208,6 +208,14 @@
     <Compile Include="Migrations\201805031110146_Added Equipment to context.Designer.cs">
       <DependentUpon>201805031110146_Added Equipment to context.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805031249446_Added serial number to Equipment.cs" />
+    <Compile Include="Migrations\201805031249446_Added serial number to Equipment.Designer.cs">
+      <DependentUpon>201805031249446_Added serial number to Equipment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805041425402_Added virtual to Asset in Equipment.cs" />
+    <Compile Include="Migrations\201805041425402_Added virtual to Asset in Equipment.Designer.cs">
+      <DependentUpon>201805041425402_Added virtual to Asset in Equipment.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\AmsDbContext.cs" />
@@ -297,6 +305,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805031110146_Added Equipment to context.resx">
       <DependentUpon>201805031110146_Added Equipment to context.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805031249446_Added serial number to Equipment.resx">
+      <DependentUpon>201805031249446_Added serial number to Equipment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805041425402_Added virtual to Asset in Equipment.resx">
+      <DependentUpon>201805041425402_Added virtual to Asset in Equipment.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

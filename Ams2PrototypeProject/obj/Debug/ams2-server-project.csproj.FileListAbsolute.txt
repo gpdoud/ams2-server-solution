@@ -105,3 +105,5 @@ C:\repos\Asset-Management-System-Repos\ams2\ams2-server-solution\Ams2PrototypePr
 C:\repos\Asset-Management-System-Repos\ams2\ams2-server-solution\Ams2PrototypeProject\obj\Debug\Ams2.Migrations.initialization.resources
 C:\repos\Asset-Management-System-Repos\ams2\ams2-server-solution\Ams2PrototypeProject\obj\Debug\ams2-server-project.csproj.GenerateResource.cache
 C:\repos\Asset-Management-System-Repos\ams2\ams2-server-solution\Ams2PrototypeProject\obj\Debug\Ams2.Migrations.AddedEquipmenttocontext.resources
+C:\repos\Asset-Management-System-Repos\ams2\ams2-server-solution\Ams2PrototypeProject\obj\Debug\Ams2.Migrations.AddedserialnumbertoEquipment.resources
+C:\repos\Asset-Management-System-Repos\ams2\ams2-server-solution\Ams2PrototypeProject\obj\Debug\Ams2.Migrations.AddedvirtualtoAssetinEquipment.resources
