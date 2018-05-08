@@ -13,6 +13,7 @@ namespace Ams2.Models {
 		public string Make { get; set; }
 		public string Model { get; set; }
 		public int? Year { get; set; }
+		public string LicensePlate { get; set; }
 		public bool Active { get; set; }
 		public DateTime DateCreated { get; set; } = DateTime.Now;
 		public DateTime? DateUpdated { get; set; }
@@ -25,6 +26,7 @@ namespace Ams2.Models {
 			this.Make = vehicle.Make;
 			this.Model = vehicle.Model;
 			this.Year = vehicle.Year;
+			this.LicensePlate = vehicle.LicensePlate;
 			this.Active = vehicle.Active;
 			this.DateCreated = vehicle.DateCreated;
 			this.DateUpdated = DateTime.Now;

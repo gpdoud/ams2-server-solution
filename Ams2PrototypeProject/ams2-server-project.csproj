@@ -216,6 +216,10 @@
     <Compile Include="Migrations\201805041425402_Added virtual to Asset in Equipment.Designer.cs">
       <DependentUpon>201805041425402_Added virtual to Asset in Equipment.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805080927170_Added license plate to vehicle.cs" />
+    <Compile Include="Migrations\201805080927170_Added license plate to vehicle.Designer.cs">
+      <DependentUpon>201805080927170_Added license plate to vehicle.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\AmsDbContext.cs" />
@@ -311,6 +315,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805041425402_Added virtual to Asset in Equipment.resx">
       <DependentUpon>201805041425402_Added virtual to Asset in Equipment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805080927170_Added license plate to vehicle.resx">
+      <DependentUpon>201805080927170_Added license plate to vehicle.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
