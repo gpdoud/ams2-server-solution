@@ -23,8 +23,11 @@ namespace Ams2.Controllers {
 		[HttpGet]
 		[ActionName("Get")]
 		public JsonResponse GetAddress(int? id) {
-			if (id == null) return null;
+			if (id == null)
+				return new JsonResponse { Message = "Parameter id cannot be null" };
 			var address = db.Addresses.Find(id);
+			if (address == null)
+				return new JsonResponse { Message = $"Address id={id} not found" };
 			return new JsonResponse(address);
 		}
 

@@ -1,4 +1,5 @@
 ﻿using Ams2.Models;
+using Ams2.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,68 +17,72 @@ namespace Ams2.Controllers {
 
 		[HttpGet]
 		[ActionName("List")]
-		public IEnumerable<Equipment> GetEquipment() {
-			return db.Equipments.ToList();
+		public JsonResponse GetEquipment() {
+			return new JsonResponse(db.Equipments.ToList());
 		}
 
 		[HttpGet]
 		[ActionName("Get")]
-		public Equipment GetEquipment(int? id) {
-			if (id == null) return null;
+		public JsonResponse GetEquipment(int? id) {
+			if (id == null)
+				return new JsonResponse { Message = "Parameter id cannot be null" };
 			var equipment = db.Equipments.Find(id);
-			return equipment; // may be null 
+			if(equipment == null)
+				return new JsonResponse { Message = $"Equipment id={id} not found" };
+			return new JsonResponse(equipment); 
 		}
 
 		[HttpPost]
 		[ActionName("Create")]
-		public bool CreateEquipment([FromBody] Equipment equipment) {
-			if (equipment == null) return false;
-			if (!ModelState.IsValid) return false;
+		public JsonResponse CreateEquipment([FromBody] Equipment equipment) {
+			if (equipment == null)
+				return new JsonResponse { Message = "Parameter equipment cannot be null" };
+			if (!ModelState.IsValid)
+				return new JsonResponse { Message = "ModelState invalid", Error = ModelState };
 			// add the asset first
+			// needs all the asset data entered already
 			var asset = db.Assets.Add(equipment.Asset);
-			SaveChanges(); // so the asset exists for the equipment
+			var recsAffected = db.SaveChanges(); // so the asset exists for the equipment
+			if (recsAffected != 1)
+				return new JsonResponse("Create asset failed while attempting to add equipment");
 			equipment.AssetId = asset.Id; // this gets the generated PK
 			db.Equipments.Add(equipment);
-			return SaveChanges();
+			var resp = new JsonResponse { Message = "Equipment Created", Data = equipment };
+			return SaveChanges(resp);
 		}
 
 		[HttpPost]
 		[ActionName("Change")]
-		public bool ChangeEquipment([FromBody] Equipment equipment) {
-			if (equipment == null) return false;
-			if (!ModelState.IsValid) return false;
-			var asset2 = db.Assets.Find(equipment.Asset.Id);
-			if (asset2 == null) return false;
-			asset2.Copy(equipment.Asset);
-			SaveChanges();
-			var vehicle2 = db.Equipments.Find(equipment.Id);
-			if (vehicle2 == null) return false;
-			vehicle2.Copy(equipment);
-			vehicle2.Asset = null;
-			return SaveChanges();
+		public JsonResponse ChangeEquipment([FromBody] Equipment equipment) {
+			if (equipment == null)
+				return new JsonResponse { Message = "Parameter equipment cannot be null" };
+			if (!ModelState.IsValid)
+				return new JsonResponse { Message = "ModelState invalid", Error = ModelState };
+			db.Entry(equipment.Asset).State = System.Data.Entity.EntityState.Modified;
+			db.Entry(equipment).State = System.Data.Entity.EntityState.Modified;
+			var resp = new JsonResponse { Message = "Equipment Changed", Data = equipment };
+			return SaveChanges(resp);
 		}
 
 		[HttpPost]
 		[ActionName("Remove")]
-		public bool RemoveEquipment([FromBody] Equipment equipment) {
-			if (equipment == null) return false;
-			var vehicle2 = db.Equipments.Find(equipment.Id);
-			if (vehicle2 == null) return false;
-			var asset2Id = vehicle2.Asset.Id;
-			var asset2 = db.Assets.Find(asset2Id);
-			db.Equipments.Remove(vehicle2);
-			SaveChanges();
-			db.Assets.Remove(asset2);
-			return SaveChanges();
+		public JsonResponse RemoveEquipment([FromBody] Equipment equipment) {
+			if (equipment == null)
+				return new JsonResponse { Message = "Parameter equipment cannot be null" };
+			db.Entry(equipment.Asset).State = System.Data.Entity.EntityState.Deleted;
+			// the related equipment record will be deleted also because
+			// of cascading delete
+			var resp = new JsonResponse { Message = "Equipment Removed", Data = equipment };
+			return SaveChanges(resp);
 		}
 
-		private bool SaveChanges() {
+		private JsonResponse SaveChanges(JsonResponse resp) {
 			try {
 				db.SaveChanges();
-				return true;
-			} catch (Exception) {
+				return resp ?? JsonResponse.Ok;
+			} catch (Exception ex) {
+				return new JsonResponse { Message = ex.Message, Error = ex };
 			}
-			return false;
 		}
 
 	}

@@ -26,9 +26,11 @@ namespace Ams2.Controllers {
 		[HttpGet]
 		[ActionName("Get")]
 		public JsonResponse GetAssets(int? id) {
-			if (id == null) return null;
+			if (id == null)
+				return new JsonResponse { Message = "Parameter id cannot be null" };
 			var asset = db.Assets.Find(id);
-			if (asset == null) return null;
+			if (asset == null)
+				return new JsonResponse { Message = $"Asset id={id} not found" };
 			return new JsonResponse(asset);
 		}
 

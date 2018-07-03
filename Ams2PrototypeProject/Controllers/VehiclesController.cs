@@ -32,8 +32,11 @@ namespace Ams2.Controllers {
 		[HttpGet]
 		[ActionName("Get")]
 		public JsonResponse GetVehicle(int? id) {
-			if (id == null) return null;
+			if (id == null)
+				return new JsonResponse { Message = "Parameter id cannot be null" };
 			var vehicle = db.Vehicles.Find(id);
+			if (vehicle == null)
+				return new JsonResponse { Message = $"Vehicle id={id} not found" };
 			return new JsonResponse(vehicle); // may be null 
 		}
 

@@ -32,8 +32,11 @@ namespace Ams2.Controllers {
 		[HttpGet]
 		[ActionName("Get")]
 		public JsonResponse GetUser(int? id) {
-			if (id == null) return null;
+			if (id == null)
+				return new JsonResponse { Message = "Parameter id cannot be null" };
 			var user = db.Users.Find(id);
+			if (user == null)
+				return new JsonResponse { Message = $"User id={id} not found" };
 			return new JsonResponse(user);
 		}
 
