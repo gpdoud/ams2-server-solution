@@ -1,4 +1,5 @@
 ﻿using Ams2.Models;
+using Ams2.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,67 +25,67 @@ namespace Ams2.Controllers {
 
 		[HttpGet]
 		[ActionName("List")]
-		public IEnumerable<Vehicle> GetVehicles() {
-			return db.Vehicles.ToList();
+		public JsonResponse GetVehicles() {
+			return new JsonResponse(db.Vehicles.ToList());
 		}
 
 		[HttpGet]
 		[ActionName("Get")]
-		public Vehicle GetVehicle(int? id) {
+		public JsonResponse GetVehicle(int? id) {
 			if (id == null) return null;
 			var vehicle = db.Vehicles.Find(id);
-			return vehicle; // may be null 
+			return new JsonResponse(vehicle); // may be null 
 		}
 
 		[HttpPost]
 		[ActionName("Create")]
-		public bool PutVehicle([FromBody] Vehicle vehicle) {
-			if (vehicle == null) return false;
-			if (!ModelState.IsValid) return false;
+		public JsonResponse PutVehicle([FromBody] Vehicle vehicle) {
+			if (vehicle == null)
+				return new JsonResponse { Message = "Parameter vehicle cannot be null" };
+			if (!ModelState.IsValid)
+				return new JsonResponse { Message = "ModelState invalid", Error = ModelState };
 			// add the asset first
 			var asset = db.Assets.Add(vehicle.Asset);
-			SaveChanges(); // so the asset exists for the vehicle
+			db.SaveChanges(); // so the asset exists for the vehicle
 			vehicle.AssetId = asset.Id; // this gets the generated PK
 			db.Vehicles.Add(vehicle);
-			return SaveChanges();
+			var resp = new JsonResponse { Message = "Vehicle Created", Data = vehicle };
+			return SaveChanges(resp);
 		}
 
 		[HttpPost]
 		[ActionName("Change")]
-		public bool PostVehicle([FromBody] Vehicle vehicle) {
-			if (vehicle == null) return false;
-			if (!ModelState.IsValid) return false;
-			var asset2 = db.Assets.Find(vehicle.Asset.Id);
-			if (asset2 == null) return false;
-			asset2.Copy(vehicle.Asset);
-			SaveChanges();
-			var vehicle2 = db.Vehicles.Find(vehicle.Id);
-			if (vehicle2 == null) return false;
-			vehicle2.Copy(vehicle);
-			return SaveChanges();
+		public JsonResponse PostVehicle([FromBody] Vehicle vehicle) {
+			if (vehicle == null)
+				return new JsonResponse { Message = "Parameter vehicle cannot be null" };
+			if (!ModelState.IsValid)
+				return new JsonResponse { Message = "ModelState invalid", Error = ModelState };
+			db.Entry(vehicle.Asset).State = System.Data.Entity.EntityState.Modified;
+			db.Entry(vehicle).State = System.Data.Entity.EntityState.Modified;
+			var resp = new JsonResponse { Message = "Vehicle Changed", Data = vehicle };
+			return SaveChanges(resp);
 		}
 
 		[HttpPost]
 		[ActionName("Remove")]
-		public bool DeleteVehicle([FromBody] Vehicle vehicle) {
-			if (vehicle == null) return false;
-			var vehicle2 = db.Vehicles.Find(vehicle.Id);
-			if (vehicle2 == null) return false;
-			var asset2Id = vehicle2.Asset.Id;
-			var asset2 = db.Assets.Find(asset2Id);
-			db.Vehicles.Remove(vehicle2);
-			SaveChanges();
-			db.Assets.Remove(asset2);
-			return SaveChanges();
+		public JsonResponse DeleteVehicle([FromBody] Vehicle vehicle) {
+			if (vehicle == null)
+				return new JsonResponse { Message = "Parameter vehicle cannot be null" };
+			if (!ModelState.IsValid)
+				return new JsonResponse { Message = "ModelState invalid", Error = ModelState };
+			//db.Entry(vehicle).State = System.Data.Entity.EntityState.Deleted;
+			db.Entry(vehicle.Asset).State = System.Data.Entity.EntityState.Deleted;
+			var resp = new JsonResponse { Message = "Vehicle Removed", Data = vehicle };
+			return SaveChanges(resp);
 		}
 
-		private bool SaveChanges() {
+		private JsonResponse SaveChanges(JsonResponse resp) {
 			try {
 				db.SaveChanges();
-				return true;
-			} catch (Exception) {
+				return resp ?? JsonResponse.Ok;
+			} catch (Exception ex) {
+				return new JsonResponse { Message = ex.Message, Error = ex };
 			}
-			return false;
 		}
 	}
 }

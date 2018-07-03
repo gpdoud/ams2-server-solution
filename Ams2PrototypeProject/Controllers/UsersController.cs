@@ -1,4 +1,5 @@
 ﻿using Ams2.Models;
+using Ams2.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,63 +17,71 @@ namespace Ams2.Controllers {
 
 		[HttpGet]
 		[ActionName("Login")]
-		public User LoginUser(string username, string password) {
+		public JsonResponse LoginUser(string username, string password) {
 			if (username == null || password == null) return null;
 			var user = db.Users.SingleOrDefault(u => u.Username == username && u.Password == password);
-			return user;
+			return new JsonResponse(user);
 		}
 
 		[HttpGet]
 		[ActionName("List")]
-		public IEnumerable<User> GetUsers() {
-			return db.Users.ToList();
+		public JsonResponse GetUsers() {
+			return new JsonResponse(db.Users.ToList());
 		}
 
 		[HttpGet]
 		[ActionName("Get")]
-		public User GetUser(int? id) {
+		public JsonResponse GetUser(int? id) {
 			if (id == null) return null;
 			var user = db.Users.Find(id);
-			return user;
+			return new JsonResponse(user);
 		}
 
 		[HttpPost]
 		[ActionName("Create")]
-		public bool AddUser([FromBody] User user) {
-			if (!ModelState.IsValid) return false;
+		public JsonResponse AddUser([FromBody] User user) {
+			if (user == null)
+				return new JsonResponse { Message = "Parameter user cannot be null" };
+			if (!ModelState.IsValid)
+				return new JsonResponse { Message = "ModelState invalid", Error = ModelState };
 			user.DateCreated = DateTime.Now;
 			db.Users.Add(user);
-			return SaveChanges();
+			var resp = new JsonResponse { Message = "User Created", Data = user };
+			return SaveChanges(resp);
 		}
 
 		[HttpPost]
 		[ActionName("Change")]
-		public bool ChangeUser([FromBody] User user) {
-			if (!ModelState.IsValid) return false;
-			var dbuser = db.Users.Find(user.Id);
-			if (dbuser == null) return false;
-			dbuser.Copy(user);
-			dbuser.DateUpdated = DateTime.Now;
-			return SaveChanges();
+		public JsonResponse ChangeUser([FromBody] User user) {
+			if (user == null)
+				return new JsonResponse { Message = "Parameter user cannot be null" };
+			if (!ModelState.IsValid)
+				return new JsonResponse { Message = "ModelState invalid", Error = ModelState };
+			user.DateUpdated = DateTime.Now;
+			db.Entry(user).State = System.Data.Entity.EntityState.Modified;
+			var resp = new JsonResponse { Message = "User Changed", Data = user };
+			return SaveChanges(resp);
 		}
 
 		[HttpPost]
 		[ActionName("Remove")]
-		public bool RemoveUser([FromBody] User user) {
-			if (!ModelState.IsValid) return false;
-			var dbuser = db.Users.Find(user.Id);
-			if (dbuser == null) return false;
-			db.Users.Remove(dbuser);
-			return SaveChanges();
+		public JsonResponse RemoveUser([FromBody] User user) {
+			if (user == null)
+				return new JsonResponse { Message = "Parameter user cannot be null" };
+			if (!ModelState.IsValid)
+				return new JsonResponse { Message = "ModelState invalid", Error = ModelState };
+			db.Entry(user).State = System.Data.Entity.EntityState.Deleted;
+			var resp = new JsonResponse { Message = "User Removed", Data = user };
+			return SaveChanges(resp);
 		}
 
-		private bool SaveChanges() {
+		private JsonResponse SaveChanges(JsonResponse resp = null) {
 			try {
 				db.SaveChanges();
-				return true;
-			} catch (Exception) {
+				return resp ?? JsonResponse.Ok;
+			} catch (Exception ex) {
+				return new JsonResponse { Message = ex.Message, Error = ex };
 			}
-			return false;
 		}
 	}
 }

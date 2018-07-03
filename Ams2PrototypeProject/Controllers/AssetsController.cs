@@ -1,4 +1,5 @@
 ﻿using Ams2.Models;
+using Ams2.Utility;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
@@ -18,56 +19,60 @@ namespace Ams2.Controllers {
 
 		[HttpGet]
 		[ActionName("List")]
-		public IEnumerable<Asset> GetAssets() {
-			return db.Assets.ToList();
+		public JsonResponse GetAssets() {
+			return new JsonResponse(db.Assets.ToList());
 		}
 
 		[HttpGet]
 		[ActionName("Get")]
-		public Asset GetAssets(int? id) {
+		public JsonResponse GetAssets(int? id) {
 			if (id == null) return null;
 			var asset = db.Assets.Find(id);
 			if (asset == null) return null;
-			return asset;
+			return new JsonResponse(asset);
 		}
 
 		[HttpPost]
 		[ActionName("Create")]
-		public bool PutAsset([FromBody] Asset asset) {
-			if (asset == null) return false;
-			if (!ModelState.IsValid) return false;
+		public JsonResponse PutAsset([FromBody] Asset asset) {
+			if (asset == null)
+				return new JsonResponse { Message = "Parameter asset cannot be null" };
+			if (!ModelState.IsValid)
+				return new JsonResponse { Message = "ModelState invalid", Error = ModelState };
 			db.Assets.Add(asset);
-			return SaveChanges();
+			var resp = new JsonResponse { Message = "Asset Created", Data = asset };
+			return SaveChanges(resp);
 		}
 
 		[HttpPost]
 		[ActionName("Change")]
-		public bool PostAsset([FromBody] Asset asset) {
-			if (asset == null) return false;
-			if (!ModelState.IsValid) return false;
-			var asset2 = db.Assets.Find(asset.Id);
-			if (asset2 == null) return false;
-			asset2.Copy(asset);
-			return SaveChanges();
+		public JsonResponse PostAsset([FromBody] Asset asset) {
+			if (asset == null)
+				return new JsonResponse { Message = "Parameter asset cannot be null" };
+			if (!ModelState.IsValid)
+				return new JsonResponse { Message = "ModelState invalid", Error = ModelState };
+			db.Entry(asset).State = System.Data.Entity.EntityState.Modified;
+			var resp = new JsonResponse { Message = "Asset Changed", Data = asset };
+			return SaveChanges(resp);
 		}
 
 		[HttpPost]
 		[ActionName("Remove")]
-		public bool DeleteAsset([FromBody] Asset asset) {
-			if (asset == null) return false;
-			var asset2 = db.Assets.Find(asset.Id);
-			if (asset2 == null) return false;
-			db.Assets.Remove(asset2);
-			return SaveChanges();
+		public JsonResponse DeleteAsset([FromBody] Asset asset) {
+			if (asset == null)
+				return new JsonResponse { Message = "Parameter asset cannot be null" };
+			db.Entry(asset).State = System.Data.Entity.EntityState.Deleted;
+			var resp = new JsonResponse { Message = "Asset Removed", Data = asset };
+			return SaveChanges(resp);
 		}
 
-		private bool SaveChanges() {
+		private JsonResponse SaveChanges(JsonResponse resp) {
 			try {
 				db.SaveChanges();
-				return true;
-			} catch (Exception) {
+				return resp ?? JsonResponse.Ok;
+			} catch (Exception ex) {
+				return new JsonResponse { Message = ex.Message, Error = ex };
 			}
-			return false;
 		}
 	}
 }

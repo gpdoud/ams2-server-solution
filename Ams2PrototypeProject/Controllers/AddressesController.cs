@@ -1,4 +1,5 @@
 ﻿using Ams2.Models;
+using Ams2.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,58 +16,63 @@ namespace Ams2.Controllers {
 
 		[HttpGet]
 		[ActionName("List")]
-		public IEnumerable<Address> GetAddresses() {
-			return db.Addresses.ToList();
+		public JsonResponse GetAddresss() {
+			return new JsonResponse(db.Addresses.ToList());
 		}
 
 		[HttpGet]
 		[ActionName("Get")]
-		public Address GetAddress(int? id) {
+		public JsonResponse GetAddress(int? id) {
 			if (id == null) return null;
 			var address = db.Addresses.Find(id);
-			return address;
+			return new JsonResponse(address);
 		}
 
 		[HttpPost]
 		[ActionName("Create")]
-		public bool AddAddress([FromBody] Address address) {
-			if (address == null) return false;
-			if (!ModelState.IsValid) return false;
+		public JsonResponse AddAddress([FromBody] Address address) {
+			if (address == null)
+				return new JsonResponse { Message = "Parameter address cannot be null" };
+			if (!ModelState.IsValid)
+				return new JsonResponse { Message = "ModelState invalid", Error = ModelState };
 			address.DateCreated = DateTime.Now;
 			db.Addresses.Add(address);
-			return SaveChanges();
+			var resp = new JsonResponse { Message = "Address Created", Data = address };
+			return SaveChanges(resp);
 		}
 
 		[HttpPost]
 		[ActionName("Change")]
-		public bool ChgAddress([FromBody] Address address) {
-			if (address == null) return false;
-			if (!ModelState.IsValid) return false;
-			var address2 = db.Addresses.Find(address.Id);
-			if (address2 == null) return false;
-			address2.Copy(address);
-			address2.DateUpdated = DateTime.Now;
-			return SaveChanges();
+		public JsonResponse ChangeAddress([FromBody] Address address) {
+			if (address == null)
+				return new JsonResponse { Message = "Parameter address cannot be null" };
+			if (!ModelState.IsValid)
+				return new JsonResponse { Message = "ModelState invalid", Error = ModelState };
+			address.DateUpdated = DateTime.Now;
+			db.Entry(address).State = System.Data.Entity.EntityState.Modified;
+			var resp = new JsonResponse { Message = "Address Changed", Data = address };
+			return SaveChanges(resp);
 		}
 
 		[HttpPost]
 		[ActionName("Remove")]
-		public bool RemAddress([FromBody] Address address) {
-			if (address == null) return false;
-			if (!ModelState.IsValid) return false;
-			var address2 = db.Addresses.Find(address.Id);
-			if (address2 == null) return false;
-			db.Addresses.Remove(address2);
-			return SaveChanges();
+		public JsonResponse RemoveAddress([FromBody] Address address) {
+			if (address == null)
+				return new JsonResponse { Message = "Parameter address cannot be null" };
+			if (!ModelState.IsValid)
+				return new JsonResponse { Message = "ModelState invalid", Error = ModelState };
+			db.Entry(address).State = System.Data.Entity.EntityState.Deleted;
+			var resp = new JsonResponse { Message = "Address Removed", Data = address };
+			return SaveChanges(resp);
 		}
 
-		private bool SaveChanges() {
+		private JsonResponse SaveChanges(JsonResponse resp = null) {
 			try {
 				db.SaveChanges();
-				return true;
-			} catch (Exception) {
+				return resp ?? JsonResponse.Ok;
+			} catch (Exception ex) {
+				return new JsonResponse { Message = ex.Message, Error = ex };
 			}
-			return false;
 		}
 	}
 }
