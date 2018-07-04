@@ -56,6 +56,11 @@ namespace Ams2.Controllers {
 		public JsonResponse ChangeEquipment([FromBody] Equipment equipment) {
 			if (equipment == null)
 				return new JsonResponse { Message = "Parameter equipment cannot be null" };
+			// issue #11
+			// If the addressId in the asset is set to null (clears the address dropdown)
+			// set the Asset instance to null also.
+			if (equipment.Asset.AddressId == null)
+				equipment.Asset.Address = null;
 			if (!ModelState.IsValid)
 				return new JsonResponse { Message = "ModelState invalid", Error = ModelState };
 			db.Entry(equipment.Asset).State = System.Data.Entity.EntityState.Modified;
