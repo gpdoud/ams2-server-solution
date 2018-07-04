@@ -8,7 +8,11 @@ using System.Web;
 namespace Ams2.Models {
 	public class User {
 		public int Id { get; set; }
+		[Index("IDX_Username", IsUnique = true)]
+		[StringLength(50)]
+		[Required]
 		public string Username { get; set; }
+		[Required]
 		public string Password { get; set; }
 		public string Firstname { get; set; }
 		public string Lastname { get; set; }
@@ -21,14 +25,5 @@ namespace Ams2.Models {
 		public DateTime DateCreated { get; set; } = DateTime.Now;
 		public DateTime? DateUpdated { get; set; }
 
-		public void Copy(User user) {
-			this.Username = user.Username;
-			this.Password = user.Password;
-			this.Firstname = user.Firstname;
-			this.Lastname = user.Lastname;
-			this.Phone = user.Phone;
-			this.Email = user.Email;
-			this.Active = user.Active;
-		}
 	}
 }

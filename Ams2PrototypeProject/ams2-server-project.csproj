@@ -220,6 +220,14 @@
     <Compile Include="Migrations\201805080927170_Added license plate to vehicle.Designer.cs">
       <DependentUpon>201805080927170_Added license plate to vehicle.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807032257291_added User.Username index.cs" />
+    <Compile Include="Migrations\201807032257291_added User.Username index.Designer.cs">
+      <DependentUpon>201807032257291_added User.Username index.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807032349164_add index to equipment.serialnumber.cs" />
+    <Compile Include="Migrations\201807032349164_add index to equipment.serialnumber.Designer.cs">
+      <DependentUpon>201807032349164_add index to equipment.serialnumber.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\AmsDbContext.cs" />
@@ -320,6 +328,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805080927170_Added license plate to vehicle.resx">
       <DependentUpon>201805080927170_Added license plate to vehicle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807032257291_added User.Username index.resx">
+      <DependentUpon>201807032257291_added User.Username index.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807032349164_add index to equipment.serialnumber.resx">
+      <DependentUpon>201807032349164_add index to equipment.serialnumber.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

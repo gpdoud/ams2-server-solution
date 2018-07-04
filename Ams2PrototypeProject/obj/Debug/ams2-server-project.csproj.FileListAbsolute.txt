@@ -108,3 +108,5 @@ C:\repos\Asset-Management-System-Repos\ams2\ams2-server-solution\Ams2PrototypePr
 C:\repos\Asset-Management-System-Repos\ams2\ams2-server-solution\Ams2PrototypeProject\obj\Debug\Ams2.Migrations.AddedvirtualtoAssetinEquipment.resources
 C:\repos\Asset-Management-System-Repos\ams2\ams2-server-solution\Ams2PrototypeProject\obj\Debug\Ams2.Migrations.Addedlicenseplatetovehicle.resources
 C:\repos\Asset-Management-System-Repos\ams2\ams2-server-solution\Ams2PrototypeProject\obj\Debug\ams2-server-project.csprojAssemblyReference.cache
+C:\repos\Asset-Management-System-Repos\ams2\ams2-server-solution\Ams2PrototypeProject\obj\Debug\Ams2.Migrations.addedUserUsernameindex.resources
+C:\repos\Asset-Management-System-Repos\ams2\ams2-server-solution\Ams2PrototypeProject\obj\Debug\Ams2.Migrations.addindextoequipmentserialnumber.resources

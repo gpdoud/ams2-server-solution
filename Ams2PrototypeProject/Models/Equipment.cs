@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -11,6 +13,8 @@ namespace Ams2.Models {
 		public int Id { get; set; }
 		public int AssetId { get; set; }
 		public string Description { get; set; }
+		[Index("IDX_SerialNumber", IsUnique = true)]
+		[StringLength(50)]
 		public string SerialNumber { get; set; }
 		public bool Active { get; set; }
 		public DateTime DateCreated { get; set; } = DateTime.Now;
