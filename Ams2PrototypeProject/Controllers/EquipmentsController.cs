@@ -46,6 +46,7 @@ namespace Ams2.Controllers {
 			if (recsAffected != 1)
 				return new JsonResponse("Create asset failed while attempting to add equipment");
 			equipment.AssetId = asset.Id; // this gets the generated PK
+			equipment.DateCreated = DateTime.Now;
 			db.Equipments.Add(equipment);
 			var resp = new JsonResponse { Message = "Equipment Created", Data = equipment };
 			return SaveChanges(resp);
@@ -63,6 +64,7 @@ namespace Ams2.Controllers {
 				equipment.Asset.Address = null;
 			if (!ModelState.IsValid)
 				return new JsonResponse { Message = "ModelState invalid", Error = ModelState };
+			equipment.DateUpdated = DateTime.Now;
 			db.Entry(equipment.Asset).State = System.Data.Entity.EntityState.Modified;
 			db.Entry(equipment).State = System.Data.Entity.EntityState.Modified;
 			var resp = new JsonResponse { Message = "Equipment Changed", Data = equipment };

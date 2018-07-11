@@ -228,6 +228,11 @@
     <Compile Include="Migrations\201807032349164_add index to equipment.serialnumber.Designer.cs">
       <DependentUpon>201807032349164_add index to equipment.serialnumber.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807111710542_added code,year,make\mfg,model to equipment.cs" />
+    <Compile Include="Migrations\201807111711512_added code,year,make_mfg,model to equipment.cs" />
+    <Compile Include="Migrations\201807111711512_added code,year,make_mfg,model to equipment.Designer.cs">
+      <DependentUpon>201807111711512_added code,year,make_mfg,model to equipment.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\AmsDbContext.cs" />
@@ -334,6 +339,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807032349164_add index to equipment.serialnumber.resx">
       <DependentUpon>201807032349164_add index to equipment.serialnumber.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807111711512_added code,year,make_mfg,model to equipment.resx">
+      <DependentUpon>201807111711512_added code,year,make_mfg,model to equipment.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

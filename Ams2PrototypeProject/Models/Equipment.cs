@@ -11,7 +11,11 @@ namespace Ams2.Models {
 	/// </summary>
 	public class Equipment {
 		public int Id { get; set; }
+		public string Code { get; set; }
 		public int AssetId { get; set; }
+		public string Make { get; set; }
+		public string Model { get; set; }
+		public int? Year { get; set; }
 		public string Description { get; set; }
 		[Index("IDX_SerialNumber", IsUnique = true)]
 		[StringLength(50)]
@@ -36,6 +40,10 @@ namespace Ams2.Models {
 		public void Copy(Equipment e) {
 			this.AssetId = e.AssetId;
 			this.Asset = e.Asset;
+			this.Code = e.Code;
+			this.Year = e.Year;
+			this.Make = e.Make;
+			this.Model = e.Model;
 			this.Description = e.Description;
 			this.SerialNumber = e.SerialNumber;
 			this.Active = e.Active;
