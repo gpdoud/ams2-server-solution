@@ -191,6 +191,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AddressesController.cs" />
     <Compile Include="Controllers\AssetsController.cs" />
+    <Compile Include="Controllers\DepartmentsController.cs" />
     <Compile Include="Controllers\EquipmentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoggerController.cs" />
@@ -233,10 +234,15 @@
     <Compile Include="Migrations\201807111711512_added code,year,make_mfg,model to equipment.Designer.cs">
       <DependentUpon>201807111711512_added code,year,make_mfg,model to equipment.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807111946549_add department.cs" />
+    <Compile Include="Migrations\201807111946549_add department.Designer.cs">
+      <DependentUpon>201807111946549_add department.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\AmsDbContext.cs" />
     <Compile Include="Models\Asset.cs" />
+    <Compile Include="Models\Department.cs" />
     <Compile Include="Models\Equipment.cs" />
     <Compile Include="Models\SystemConfig.cs" />
     <Compile Include="Models\Logger.cs" />
@@ -342,6 +348,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807111711512_added code,year,make_mfg,model to equipment.resx">
       <DependentUpon>201807111711512_added code,year,make_mfg,model to equipment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807111946549_add department.resx">
+      <DependentUpon>201807111946549_add department.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -111,3 +111,4 @@ C:\repos\Asset-Management-System-Repos\ams2\ams2-server-solution\Ams2PrototypePr
 C:\repos\Asset-Management-System-Repos\ams2\ams2-server-solution\Ams2PrototypeProject\obj\Debug\Ams2.Migrations.addedUserUsernameindex.resources
 C:\repos\Asset-Management-System-Repos\ams2\ams2-server-solution\Ams2PrototypeProject\obj\Debug\Ams2.Migrations.addindextoequipmentserialnumber.resources
 C:\repos\Asset-Management-System-Repos\ams2\ams2-server-solution\Ams2PrototypeProject\obj\Debug\Ams2.Migrations.addedcodeyearmake_mfgmodeltoequipment.resources
+C:\repos\Asset-Management-System-Repos\ams2\ams2-server-solution\Ams2PrototypeProject\obj\Debug\Ams2.Migrations.adddepartment.resources
