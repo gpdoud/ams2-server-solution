@@ -20,7 +20,10 @@ namespace Ams2.Models {
 		public string Fullname { get { return $"{Firstname} {Lastname}"; } }
 		public string Phone { get; set; }
 		public string Email { get; set; }
-		//
+		// add department
+		public int? DepartmentId { get; set; }
+		public virtual Department Department { get; set; }
+										   //
 		public Boolean Active { get; set; } = true;
 		public DateTime DateCreated { get; set; } = DateTime.Now;
 		public DateTime? DateUpdated { get; set; }

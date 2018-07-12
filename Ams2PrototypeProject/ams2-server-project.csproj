@@ -238,6 +238,10 @@
     <Compile Include="Migrations\201807111946549_add department.Designer.cs">
       <DependentUpon>201807111946549_add department.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807120054464_add department as opt FK to user.cs" />
+    <Compile Include="Migrations\201807120054464_add department as opt FK to user.Designer.cs">
+      <DependentUpon>201807120054464_add department as opt FK to user.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\AmsDbContext.cs" />
@@ -351,6 +355,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807111946549_add department.resx">
       <DependentUpon>201807111946549_add department.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807120054464_add department as opt FK to user.resx">
+      <DependentUpon>201807120054464_add department as opt FK to user.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
