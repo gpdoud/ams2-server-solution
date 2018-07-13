@@ -190,7 +190,9 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AddressesController.cs" />
+    <Compile Include="Controllers\AmsWebApiController.cs" />
     <Compile Include="Controllers\AssetsController.cs" />
+    <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\DepartmentsController.cs" />
     <Compile Include="Controllers\EquipmentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -242,10 +244,15 @@
     <Compile Include="Migrations\201807120054464_add department as opt FK to user.Designer.cs">
       <DependentUpon>201807120054464_add department as opt FK to user.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807130127165_Add Category.cs" />
+    <Compile Include="Migrations\201807130127165_Add Category.Designer.cs">
+      <DependentUpon>201807130127165_Add Category.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\AmsDbContext.cs" />
     <Compile Include="Models\Asset.cs" />
+    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\Equipment.cs" />
     <Compile Include="Models\SystemConfig.cs" />
@@ -358,6 +365,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807120054464_add department as opt FK to user.resx">
       <DependentUpon>201807120054464_add department as opt FK to user.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807130127165_Add Category.resx">
+      <DependentUpon>201807130127165_Add Category.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
