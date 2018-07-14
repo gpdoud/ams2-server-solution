@@ -10,7 +10,7 @@ namespace Ams2.Models {
 		public string Code { get; set; }
 		public string Description { get; set; }
 		public int AssetId { get; set; }
-		public int AddressId { get; set; }
+		public int? AddressId { get; set; }
 
 		public bool Active { get; set; } = true;
 		public DateTime DateCreated { get; set; } = DateTime.Now;

@@ -197,6 +197,7 @@
     <Compile Include="Controllers\EquipmentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoggerController.cs" />
+    <Compile Include="Controllers\PropertiesController.cs" />
     <Compile Include="Controllers\SystemConfigController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\VehiclesController.cs" />
@@ -251,6 +252,10 @@
     <Compile Include="Migrations\201807141251486_add property fk address.cs" />
     <Compile Include="Migrations\201807141251486_add property fk address.Designer.cs">
       <DependentUpon>201807141251486_add property fk address.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807141316520_Make AddressId optional fk.cs" />
+    <Compile Include="Migrations\201807141316520_Make AddressId optional fk.Designer.cs">
+      <DependentUpon>201807141316520_Make AddressId optional fk.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Address.cs" />
@@ -376,6 +381,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807141251486_add property fk address.resx">
       <DependentUpon>201807141251486_add property fk address.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807141316520_Make AddressId optional fk.resx">
+      <DependentUpon>201807141316520_Make AddressId optional fk.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
