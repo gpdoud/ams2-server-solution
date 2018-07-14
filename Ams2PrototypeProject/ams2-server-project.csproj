@@ -257,6 +257,10 @@
     <Compile Include="Migrations\201807141316520_Make AddressId optional fk.Designer.cs">
       <DependentUpon>201807141316520_Make AddressId optional fk.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807141747068_changed property to include address,city,state,zip.cs" />
+    <Compile Include="Migrations\201807141747068_changed property to include address,city,state,zip.Designer.cs">
+      <DependentUpon>201807141747068_changed property to include address,city,state,zip.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\AmsDbContext.cs" />
@@ -384,6 +388,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807141316520_Make AddressId optional fk.resx">
       <DependentUpon>201807141316520_Make AddressId optional fk.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807141747068_changed property to include address,city,state,zip.resx">
+      <DependentUpon>201807141747068_changed property to include address,city,state,zip.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

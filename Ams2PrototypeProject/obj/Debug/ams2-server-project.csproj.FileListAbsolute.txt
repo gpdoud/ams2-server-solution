@@ -232,3 +232,4 @@ D:\repos\ams2-server-solution\Ams2PrototypeProject\obj\Debug\Ams2.Migrations.Add
 C:\repos\Asset-Management-System-Repos\ams2\ams2-server-solution\Ams2PrototypeProject\obj\Debug\Ams2.Migrations.AddCategory.resources
 C:\repos\Asset-Management-System-Repos\ams2\ams2-server-solution\Ams2PrototypeProject\obj\Debug\Ams2.Migrations.addpropertyfkaddress.resources
 C:\repos\Asset-Management-System-Repos\ams2\ams2-server-solution\Ams2PrototypeProject\obj\Debug\Ams2.Migrations.MakeAddressIdoptionalfk.resources
+C:\repos\Asset-Management-System-Repos\ams2\ams2-server-solution\Ams2PrototypeProject\obj\Debug\Ams2.Migrations.changedpropertytoincludeaddresscitystatezip.resources

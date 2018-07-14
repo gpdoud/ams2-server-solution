@@ -9,15 +9,20 @@ namespace Ams2.Models {
 
 		public string Code { get; set; }
 		public string Description { get; set; }
+		public string Address1 { get; set; }
+		public string Address2 { get; set; }
+		public string Address3 { get; set; }
+		public string City { get; set; }
+		public string State { get; set; }
+		public string Zipcode { get; set; }
+
 		public int AssetId { get; set; }
-		public int? AddressId { get; set; }
 
 		public bool Active { get; set; } = true;
 		public DateTime DateCreated { get; set; } = DateTime.Now;
 		public DateTime? DateUpdated { get; set; } = null;
 
 		public virtual Asset Asset { get; set; }
-		public virtual Address Address { get; set; }
 
 		public Property() { }
 	}

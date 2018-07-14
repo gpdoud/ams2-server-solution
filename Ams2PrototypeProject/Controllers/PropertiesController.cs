@@ -60,6 +60,7 @@ namespace Ams2.Controllers {
 			// set the Asset instance to null also.
 			if (property.Asset.AddressId == null)
 				property.Asset.Address = null;
+			
 			if (!ModelState.IsValid)
 				return new JsonResponse { Message = "ModelState invalid", Error = ModelState };
 			property.DateUpdated = DateTime.Now;
