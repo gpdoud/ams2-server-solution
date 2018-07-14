@@ -229,3 +229,5 @@ D:\repos\ams2-server-solution\Ams2PrototypeProject\obj\Debug\ams2-server-project
 D:\repos\ams2-server-solution\Ams2PrototypeProject\obj\Debug\Ams2Project.dll
 D:\repos\ams2-server-solution\Ams2PrototypeProject\obj\Debug\Ams2Project.pdb
 D:\repos\ams2-server-solution\Ams2PrototypeProject\obj\Debug\Ams2.Migrations.AddCategory.resources
+C:\repos\Asset-Management-System-Repos\ams2\ams2-server-solution\Ams2PrototypeProject\obj\Debug\Ams2.Migrations.AddCategory.resources
+C:\repos\Asset-Management-System-Repos\ams2\ams2-server-solution\Ams2PrototypeProject\obj\Debug\Ams2.Migrations.addpropertyfkaddress.resources

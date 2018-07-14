@@ -17,6 +17,7 @@ namespace Ams2.Models {
 		public DbSet<Department> Departments { get; set; }
 		public DbSet<Equipment> Equipments { get; set; }
 		public DbSet<Logger> Loggers { get; set; }
+		public DbSet<Property> Properties { get; set; }
 		public DbSet<Vehicle> Vehicles { get; set; }
 		public DbSet<SystemConfig> SystemConfig { get; set; }
 		public DbSet<User> Users { get; set; }
