@@ -261,6 +261,10 @@
     <Compile Include="Migrations\201807141747068_changed property to include address,city,state,zip.Designer.cs">
       <DependentUpon>201807141747068_changed property to include address,city,state,zip.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807151344382_add user, category, department fks to asset.cs" />
+    <Compile Include="Migrations\201807151344382_add user, category, department fks to asset.Designer.cs">
+      <DependentUpon>201807151344382_add user, category, department fks to asset.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\AmsDbContext.cs" />
@@ -391,6 +395,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807141747068_changed property to include address,city,state,zip.resx">
       <DependentUpon>201807141747068_changed property to include address,city,state,zip.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807151344382_add user, category, department fks to asset.resx">
+      <DependentUpon>201807151344382_add user, category, department fks to asset.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

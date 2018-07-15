@@ -13,9 +13,9 @@ using System.Web.Http.Cors;
 namespace Ams2.Controllers {
 
 	[EnableCors(origins: "*", headers: "*", methods: "*")]
-	public class AssetsController : ApiController {
+	public class AssetsController : AmsWebApiController {
 
-		private AmsDbContext db = new AmsDbContext();
+		//private AmsDbContext db = new AmsDbContext();
 
 		[HttpGet]
 		[ActionName("List")]
@@ -68,13 +68,13 @@ namespace Ams2.Controllers {
 			return SaveChanges(resp);
 		}
 
-		private JsonResponse SaveChanges(JsonResponse resp) {
-			try {
-				db.SaveChanges();
-				return resp ?? JsonResponse.Ok;
-			} catch (Exception ex) {
-				return new JsonResponse { Message = ex.Message, Error = ex };
-			}
-		}
+		//private JsonResponse SaveChanges(JsonResponse resp) {
+		//	try {
+		//		db.SaveChanges();
+		//		return resp ?? JsonResponse.Ok;
+		//	} catch (Exception ex) {
+		//		return new JsonResponse { Message = ex.Message, Error = ex };
+		//	}
+		//}
 	}
 }

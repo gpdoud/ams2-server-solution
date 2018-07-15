@@ -22,6 +22,12 @@ namespace Ams2.Models {
 		public decimal? ResidualValue { get; set; }
 		public int? AddressId { get; set; }
 		public virtual Address Address { get; set; }
+		public int? UserId { get; set; }
+		public virtual User User { get; set; }
+		public int? CategoryId { get; set; }
+		public virtual Category Category { get; set; }
+		public int? DepartmentId { get; set; }
+		public virtual Department Department { get; set; }
 
 		public void Copy(Asset asset) {
 			this.Code = asset.Code;
@@ -37,6 +43,9 @@ namespace Ams2.Models {
 			this.SurplusDate = asset.SurplusDate;
 			this.ResidualValue = asset.ResidualValue;
 			this.AddressId = asset.AddressId;
+			this.UserId = asset.UserId;
+			this.CategoryId = asset.CategoryId;
+			this.DepartmentId = asset.DepartmentId;
 		}
 
 		public Asset() {
