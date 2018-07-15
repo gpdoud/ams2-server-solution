@@ -58,8 +58,9 @@ namespace Ams2.Controllers {
 			// issue #11
 			// If the addressId in the asset is set to null (clears the address dropdown)
 			// set the Asset instance to null also.
-			if (property.Asset.AddressId == null)
-				property.Asset.Address = null;
+			//if (property.Asset.AddressId == null)
+			//	property.Asset.Address = null;
+			ClearAssetVirtuals(property);
 			
 			if (!ModelState.IsValid)
 				return new JsonResponse { Message = "ModelState invalid", Error = ModelState };

@@ -11,9 +11,9 @@ using System.Web.Http.Cors;
 namespace Ams2.Controllers {
 
 	[EnableCors(origins: "*", headers: "*", methods: "*")]
-	public class EquipmentsController : ApiController {
+	public class EquipmentsController : AmsWebApiController {
 
-		private AmsDbContext db = new AmsDbContext();
+		//private AmsDbContext db = new AmsDbContext();
 
 		[HttpGet]
 		[ActionName("List")]
@@ -60,8 +60,9 @@ namespace Ams2.Controllers {
 			// issue #11
 			// If the addressId in the asset is set to null (clears the address dropdown)
 			// set the Asset instance to null also.
-			if (equipment.Asset.AddressId == null)
-				equipment.Asset.Address = null;
+			//if (equipment.Asset.AddressId == null)
+			//	equipment.Asset.Address = null;
+			ClearAssetVirtuals(equipment);
 			if (!ModelState.IsValid)
 				return new JsonResponse { Message = "ModelState invalid", Error = ModelState };
 			equipment.DateUpdated = DateTime.Now;
@@ -83,14 +84,14 @@ namespace Ams2.Controllers {
 			return SaveChanges(resp);
 		}
 
-		private JsonResponse SaveChanges(JsonResponse resp) {
-			try {
-				db.SaveChanges();
-				return resp ?? JsonResponse.Ok;
-			} catch (Exception ex) {
-				return new JsonResponse { Message = ex.Message, Error = ex };
-			}
-		}
+		//private JsonResponse SaveChanges(JsonResponse resp) {
+		//	try {
+		//		db.SaveChanges();
+		//		return resp ?? JsonResponse.Ok;
+		//	} catch (Exception ex) {
+		//		return new JsonResponse { Message = ex.Message, Error = ex };
+		//	}
+		//}
 
 	}
 }

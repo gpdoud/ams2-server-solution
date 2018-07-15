@@ -21,5 +21,23 @@ namespace Ams2.Controllers {
 				return new JsonResponse { Message = ex.Message, Error = ex };
 			}
 		}
+		protected void ClearAssetVirtuals(Vehicle vehicle) {
+			vehicle.Asset.Address = null;
+			vehicle.Asset.Department = null;
+			vehicle.Asset.Category = null;
+			vehicle.Asset.User = null;
+		}
+		protected void ClearAssetVirtuals(Equipment equipment) {
+			equipment.Asset.Address = null;
+			equipment.Asset.Department = null;
+			equipment.Asset.Category = null;
+			equipment.Asset.User = null;
+		}
+		protected void ClearAssetVirtuals(Property property) {
+			property.Asset.Address = null;
+			property.Asset.Department = null;
+			property.Asset.Category = null;
+			property.Asset.User = null;
+		}
 	}
 }

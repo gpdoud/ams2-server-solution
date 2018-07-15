@@ -19,9 +19,9 @@ namespace Ams2.Controllers {
 	/// The Vehicle to Asset is a one-to-one relationship.
 	/// </summary>
 	[EnableCors(origins: "*", headers: "*", methods: "*")]
-	public class VehiclesController : ApiController {
+	public class VehiclesController : AmsWebApiController {
 
-		private AmsDbContext db = new AmsDbContext();
+		//private AmsDbContext db = new AmsDbContext();
 
 		[HttpGet]
 		[ActionName("List")]
@@ -61,14 +61,11 @@ namespace Ams2.Controllers {
 		public JsonResponse PostVehicle([FromBody] Vehicle vehicle) {
 			if (vehicle == null)
 				return new JsonResponse { Message = "Parameter vehicle cannot be null" };
-			if (vehicle.Asset.AddressId == null)
-				vehicle.Asset.Address = null;
-			if (vehicle.Asset.DepartmentId == null)
-				vehicle.Asset.Department = null;
-			if (vehicle.Asset.CategoryId == null)
-				vehicle.Asset.Category = null;
-			if (vehicle.Asset.UserId == null)
-				vehicle.Asset.User = null;
+			//vehicle.Asset.Address = null;
+			//vehicle.Asset.Department = null;
+			//vehicle.Asset.Category = null;
+			//vehicle.Asset.User = null;
+			ClearAssetVirtuals(vehicle);
 			if (!ModelState.IsValid)
 				return new JsonResponse { Message = "ModelState invalid", Error = ModelState };
 			db.Entry(vehicle.Asset).State = System.Data.Entity.EntityState.Modified;
@@ -90,13 +87,13 @@ namespace Ams2.Controllers {
 			return SaveChanges(resp);
 		}
 
-		private JsonResponse SaveChanges(JsonResponse resp) {
-			try {
-				db.SaveChanges();
-				return resp ?? JsonResponse.Ok;
-			} catch (Exception ex) {
-				return new JsonResponse { Message = ex.Message, Error = ex };
-			}
-		}
+		//private JsonResponse SaveChanges(JsonResponse resp) {
+		//	try {
+		//		db.SaveChanges();
+		//		return resp ?? JsonResponse.Ok;
+		//	} catch (Exception ex) {
+		//		return new JsonResponse { Message = ex.Message, Error = ex };
+		//	}
+		//}
 	}
 }
