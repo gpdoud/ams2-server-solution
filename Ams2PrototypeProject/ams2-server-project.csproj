@@ -265,6 +265,10 @@
     <Compile Include="Migrations\201807151344382_add user, category, department fks to asset.Designer.cs">
       <DependentUpon>201807151344382_add user, category, department fks to asset.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807182131444_add vin to vehicle.cs" />
+    <Compile Include="Migrations\201807182131444_add vin to vehicle.Designer.cs">
+      <DependentUpon>201807182131444_add vin to vehicle.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\AmsDbContext.cs" />
@@ -398,6 +402,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807151344382_add user, category, department fks to asset.resx">
       <DependentUpon>201807151344382_add user, category, department fks to asset.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807182131444_add vin to vehicle.resx">
+      <DependentUpon>201807182131444_add vin to vehicle.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
