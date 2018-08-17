@@ -235,3 +235,4 @@ C:\repos\Asset-Management-System-Repos\ams2\ams2-server-solution\Ams2PrototypePr
 C:\repos\Asset-Management-System-Repos\ams2\ams2-server-solution\Ams2PrototypeProject\obj\Debug\Ams2.Migrations.changedpropertytoincludeaddresscitystatezip.resources
 C:\repos\Asset-Management-System-Repos\ams2\ams2-server-solution\Ams2PrototypeProject\obj\Debug\Ams2.Migrations.addusercategorydepartmentfkstoasset.resources
 C:\repos\Asset-Management-System-Repos\ams2\ams2-server-solution\Ams2PrototypeProject\obj\Debug\Ams2.Migrations.addvintovehicle.resources
+C:\repos\Asset-Management-System-Repos\ams2\ams2-server-solution\Ams2PrototypeProject\obj\Debug\Ams2.Migrations.EquipmentSerialNumberchangedtononunique.resources

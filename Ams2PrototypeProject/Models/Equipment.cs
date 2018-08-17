@@ -17,7 +17,7 @@ namespace Ams2.Models {
 		public string Model { get; set; }
 		public int? Year { get; set; }
 		public string Description { get; set; }
-		[Index("IDX_SerialNumber", IsUnique = true)]
+		[Index("IDX_SerialNumber", IsUnique = false)]
 		[StringLength(50)]
 		public string SerialNumber { get; set; }
 		public bool Active { get; set; }

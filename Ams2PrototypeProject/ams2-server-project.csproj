@@ -269,6 +269,10 @@
     <Compile Include="Migrations\201807182131444_add vin to vehicle.Designer.cs">
       <DependentUpon>201807182131444_add vin to vehicle.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808171501417_Equipment.SerialNumber changed to non-unique.cs" />
+    <Compile Include="Migrations\201808171501417_Equipment.SerialNumber changed to non-unique.Designer.cs">
+      <DependentUpon>201808171501417_Equipment.SerialNumber changed to non-unique.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\AmsDbContext.cs" />
@@ -405,6 +409,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807182131444_add vin to vehicle.resx">
       <DependentUpon>201807182131444_add vin to vehicle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808171501417_Equipment.SerialNumber changed to non-unique.resx">
+      <DependentUpon>201808171501417_Equipment.SerialNumber changed to non-unique.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
