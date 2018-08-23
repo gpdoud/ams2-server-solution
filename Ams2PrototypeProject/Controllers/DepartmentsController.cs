@@ -11,8 +11,8 @@ using System.Web.Http.Cors;
 namespace Ams2.Controllers {
 
 	[EnableCors(origins: "*", headers: "*", methods: "*")]
-	public class DepartmentsController : ApiController {
-		private AmsDbContext db = new AmsDbContext();
+	public class DepartmentsController : AmsWebApiController {
+		//private AmsDbContext db = new AmsDbContext();
 
 		[HttpGet]
 		[ActionName("List")]
@@ -24,10 +24,10 @@ namespace Ams2.Controllers {
 		[ActionName("Get")]
 		public JsonResponse GetDepartment(int? id) {
 			if (id == null)
-				return new JsonResponse { Message = "Parameter id cannot be null" };
+				return new JsonResponse { Code = -2, Message = "Parameter id cannot be null" };
 			var department = db.Departments.Find(id);
 			if (department == null)
-				return new JsonResponse { Message = $"Department id={id} not found" };
+				return new JsonResponse { Code = -2, Message = $"Department id={id} not found" };
 			return new JsonResponse(department);
 		}
 
@@ -35,9 +35,9 @@ namespace Ams2.Controllers {
 		[ActionName("Create")]
 		public JsonResponse AddDepartment([FromBody] Department department) {
 			if (department == null)
-				return new JsonResponse { Message = "Parameter department cannot be null" };
+				return new JsonResponse { Code = -2, Message = "Parameter department cannot be null" };
 			if (!ModelState.IsValid)
-				return new JsonResponse { Message = "ModelState invalid", Error = ModelState };
+				return new JsonResponse { Code = -1, Message = "ModelState invalid", Error = ModelState };
 			department.DateCreated = DateTime.Now;
 			db.Departments.Add(department);
 			var resp = new JsonResponse { Message = "Department Created", Data = department };
@@ -48,9 +48,9 @@ namespace Ams2.Controllers {
 		[ActionName("Change")]
 		public JsonResponse ChangeDepartment([FromBody] Department department) {
 			if (department == null)
-				return new JsonResponse { Message = "Parameter department cannot be null" };
+				return new JsonResponse { Code = -2, Message = "Parameter department cannot be null" };
 			if (!ModelState.IsValid)
-				return new JsonResponse { Message = "ModelState invalid", Error = ModelState };
+				return new JsonResponse { Code = -1, Message = "ModelState invalid", Error = ModelState };
 			department.DateUpdated = DateTime.Now;
 			db.Entry(department).State = System.Data.Entity.EntityState.Modified;
 			var resp = new JsonResponse { Message = "Department Changed", Data = department };
@@ -61,21 +61,21 @@ namespace Ams2.Controllers {
 		[ActionName("Remove")]
 		public JsonResponse RemoveDepartment([FromBody] Department department) {
 			if (department == null)
-				return new JsonResponse { Message = "Parameter department cannot be null" };
+				return new JsonResponse { Code = -2, Message = "Parameter department cannot be null" };
 			if (!ModelState.IsValid)
-				return new JsonResponse { Message = "ModelState invalid", Error = ModelState };
+				return new JsonResponse { Code = -1, Message = "ModelState invalid", Error = ModelState };
 			db.Entry(department).State = System.Data.Entity.EntityState.Deleted;
 			var resp = new JsonResponse { Message = "Department Removed", Data = department };
 			return SaveChanges(resp);
 		}
 
-		private JsonResponse SaveChanges(JsonResponse resp = null) {
-			try {
-				db.SaveChanges();
-				return resp ?? JsonResponse.Ok;
-			} catch (Exception ex) {
-				return new JsonResponse { Message = ex.Message, Error = ex };
-			}
-		}
+		//private JsonResponse SaveChanges(JsonResponse resp = null) {
+		//	try {
+		//		db.SaveChanges();
+		//		return resp ?? JsonResponse.Ok;
+		//	} catch (Exception ex) {
+		//		return new JsonResponse { Message = ex.Message, Error = ex };
+		//	}
+		//}
 	}
 }

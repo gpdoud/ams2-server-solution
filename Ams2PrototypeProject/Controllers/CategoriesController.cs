@@ -25,10 +25,10 @@ namespace Ams2.Controllers {
 		[ActionName("Get")]
 		public JsonResponse GetCategory(int? id) {
 			if (id == null)
-				return new JsonResponse { Message = "Parameter id cannot be null" };
+				return new JsonResponse { Code = -2, Message = "Parameter id cannot be null" };
 			var Category = db.Categories.Find(id);
 			if (Category == null)
-				return new JsonResponse { Message = $"Category id={id} not found" };
+				return new JsonResponse { Code = -2, Message = $"Category id={id} not found" };
 			return new JsonResponse(Category);
 		}
 
@@ -36,9 +36,9 @@ namespace Ams2.Controllers {
 		[ActionName("Create")]
 		public JsonResponse AddCategory([FromBody] Category Category) {
 			if (Category == null)
-				return new JsonResponse { Message = "Parameter Category cannot be null" };
+				return new JsonResponse { Code = -2, Message = "Parameter Category cannot be null" };
 			if (!ModelState.IsValid)
-				return new JsonResponse { Message = "ModelState invalid", Error = ModelState };
+				return new JsonResponse { Code = -1, Message = "ModelState invalid", Error = ModelState };
 			db.Categories.Add(Category);
 			var resp = new JsonResponse { Message = "Category Created", Data = Category };
 			return SaveChanges(resp);
@@ -48,9 +48,9 @@ namespace Ams2.Controllers {
 		[ActionName("Change")]
 		public JsonResponse ChangeCategory([FromBody] Category Category) {
 			if (Category == null)
-				return new JsonResponse { Message = "Parameter Category cannot be null" };
+				return new JsonResponse { Code = -2, Message = "Parameter Category cannot be null" };
 			if (!ModelState.IsValid)
-				return new JsonResponse { Message = "ModelState invalid", Error = ModelState };
+				return new JsonResponse { Code = -1, Message = "ModelState invalid", Error = ModelState };
 			db.Entry(Category).State = System.Data.Entity.EntityState.Modified;
 			var resp = new JsonResponse { Message = "Category Changed", Data = Category };
 			return SaveChanges(resp);
@@ -60,9 +60,9 @@ namespace Ams2.Controllers {
 		[ActionName("Remove")]
 		public JsonResponse RemoveCategory([FromBody] Category Category) {
 			if (Category == null)
-				return new JsonResponse { Message = "Parameter Category cannot be null" };
+				return new JsonResponse { Code = -2, Message = "Parameter Category cannot be null" };
 			if (!ModelState.IsValid)
-				return new JsonResponse { Message = "ModelState invalid", Error = ModelState };
+				return new JsonResponse { Code = -1, Message = "ModelState invalid", Error = ModelState };
 			db.Entry(Category).State = System.Data.Entity.EntityState.Deleted;
 			var resp = new JsonResponse { Message = "Category Removed", Data = Category };
 			return SaveChanges(resp);

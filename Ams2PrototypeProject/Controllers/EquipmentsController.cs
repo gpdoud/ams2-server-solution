@@ -25,10 +25,10 @@ namespace Ams2.Controllers {
 		[ActionName("Get")]
 		public JsonResponse GetEquipment(int? id) {
 			if (id == null)
-				return new JsonResponse { Message = "Parameter id cannot be null" };
+				return new JsonResponse { Code = -2, Message = "Parameter id cannot be null" };
 			var equipment = db.Equipments.Find(id);
 			if(equipment == null)
-				return new JsonResponse { Message = $"Equipment id={id} not found" };
+				return new JsonResponse { Code = -2, Message = $"Equipment id={id} not found" };
 			return new JsonResponse(equipment); 
 		}
 
@@ -36,15 +36,15 @@ namespace Ams2.Controllers {
 		[ActionName("Create")]
 		public JsonResponse CreateEquipment([FromBody] Equipment equipment) {
 			if (equipment == null)
-				return new JsonResponse { Message = "Parameter equipment cannot be null" };
+				return new JsonResponse { Code = -2, Message = "Parameter equipment cannot be null" };
 			if (!ModelState.IsValid)
-				return new JsonResponse { Message = "ModelState invalid", Error = ModelState };
+				return new JsonResponse { Code = -1, Message = "ModelState invalid", Error = ModelState };
 			// add the asset first
 			// needs all the asset data entered already
 			var asset = db.Assets.Add(equipment.Asset);
 			var recsAffected = db.SaveChanges(); // so the asset exists for the equipment
 			if (recsAffected != 1)
-				return new JsonResponse("Create asset failed while attempting to add equipment");
+				return new JsonResponse { Code = -2, Message = "Create asset failed while attempting to add equipment" };
 			equipment.AssetId = asset.Id; // this gets the generated PK
 			equipment.DateCreated = DateTime.Now;
 			db.Equipments.Add(equipment);
@@ -56,7 +56,7 @@ namespace Ams2.Controllers {
 		[ActionName("Change")]
 		public JsonResponse ChangeEquipment([FromBody] Equipment equipment) {
 			if (equipment == null)
-				return new JsonResponse { Message = "Parameter equipment cannot be null" };
+				return new JsonResponse { Code = -2, Message = "Parameter equipment cannot be null" };
 			// issue #11
 			// If the addressId in the asset is set to null (clears the address dropdown)
 			// set the Asset instance to null also.
@@ -64,7 +64,7 @@ namespace Ams2.Controllers {
 			//	equipment.Asset.Address = null;
 			ClearAssetVirtuals(equipment);
 			if (!ModelState.IsValid)
-				return new JsonResponse { Message = "ModelState invalid", Error = ModelState };
+				return new JsonResponse { Code = -1, Message = "ModelState invalid", Error = ModelState };
 			equipment.DateUpdated = DateTime.Now;
 			db.Entry(equipment.Asset).State = System.Data.Entity.EntityState.Modified;
 			db.Entry(equipment).State = System.Data.Entity.EntityState.Modified;
@@ -76,7 +76,7 @@ namespace Ams2.Controllers {
 		[ActionName("Remove")]
 		public JsonResponse RemoveEquipment([FromBody] Equipment equipment) {
 			if (equipment == null)
-				return new JsonResponse { Message = "Parameter equipment cannot be null" };
+				return new JsonResponse { Code = -2, Message = "Parameter equipment cannot be null" };
 			db.Entry(equipment.Asset).State = System.Data.Entity.EntityState.Deleted;
 			// the related equipment record will be deleted also because
 			// of cascading delete

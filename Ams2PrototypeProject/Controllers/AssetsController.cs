@@ -27,10 +27,10 @@ namespace Ams2.Controllers {
 		[ActionName("Get")]
 		public JsonResponse GetAssets(int? id) {
 			if (id == null)
-				return new JsonResponse { Message = "Parameter id cannot be null" };
+				return new JsonResponse { Code = -2, Message = "Parameter id cannot be null" };
 			var asset = db.Assets.Find(id);
 			if (asset == null)
-				return new JsonResponse { Message = $"Asset id={id} not found" };
+				return new JsonResponse { Code = -2, Message = $"Asset id={id} not found" };
 			return new JsonResponse(asset);
 		}
 
@@ -38,9 +38,9 @@ namespace Ams2.Controllers {
 		[ActionName("Create")]
 		public JsonResponse PutAsset([FromBody] Asset asset) {
 			if (asset == null)
-				return new JsonResponse { Message = "Parameter asset cannot be null" };
+				return new JsonResponse { Code = -2, Message = "Parameter asset cannot be null" };
 			if (!ModelState.IsValid)
-				return new JsonResponse { Message = "ModelState invalid", Error = ModelState };
+				return new JsonResponse { Code = -1, Message = "ModelState invalid", Error = ModelState };
 			db.Assets.Add(asset);
 			var resp = new JsonResponse { Message = "Asset Created", Data = asset };
 			return SaveChanges(resp);
@@ -50,9 +50,9 @@ namespace Ams2.Controllers {
 		[ActionName("Change")]
 		public JsonResponse PostAsset([FromBody] Asset asset) {
 			if (asset == null)
-				return new JsonResponse { Message = "Parameter asset cannot be null" };
+				return new JsonResponse { Code = -2, Message = "Parameter asset cannot be null" };
 			if (!ModelState.IsValid)
-				return new JsonResponse { Message = "ModelState invalid", Error = ModelState };
+				return new JsonResponse { Code = -1, Message = "ModelState invalid", Error = ModelState };
 			db.Entry(asset).State = System.Data.Entity.EntityState.Modified;
 			var resp = new JsonResponse { Message = "Asset Changed", Data = asset };
 			return SaveChanges(resp);
@@ -62,7 +62,7 @@ namespace Ams2.Controllers {
 		[ActionName("Remove")]
 		public JsonResponse DeleteAsset([FromBody] Asset asset) {
 			if (asset == null)
-				return new JsonResponse { Message = "Parameter asset cannot be null" };
+				return new JsonResponse { Code = -2, Message = "Parameter asset cannot be null" };
 			db.Entry(asset).State = System.Data.Entity.EntityState.Deleted;
 			var resp = new JsonResponse { Message = "Asset Removed", Data = asset };
 			return SaveChanges(resp);

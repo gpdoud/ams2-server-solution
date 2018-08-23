@@ -33,20 +33,57 @@ namespace Ams2.Controllers {
 		[ActionName("Get")]
 		public JsonResponse GetVehicle(int? id) {
 			if (id == null)
-				return new JsonResponse { Message = "Parameter id cannot be null" };
+				return new JsonResponse { Code = -2, Message = "Parameter id cannot be null" };
 			var vehicle = db.Vehicles.Find(id);
 			if (vehicle == null)
-				return new JsonResponse { Message = $"Vehicle id={id} not found" };
+				return new JsonResponse { Code = -2, Message = $"Vehicle id={id} not found" };
 			return new JsonResponse(vehicle); // may be null 
+		}
+		/// <summary>
+		/// Check all fields that can be null, but, if not, must be unique
+		/// </summary>
+		/// <param name="vehicle"></param>
+		/// <returns></returns>
+		private bool AllFieldsAreNullOrUnique(Vehicle vehicle) {
+			return IsLicensePlateUniqueIfNotNull(vehicle) && IsVinUniqueIfNotNull(vehicle);
+		}
+		/// <summary>
+		/// This routine checks whether the licenseplate field that will be added or
+		/// changed is unique. It is ok if it is null, but if there is a value, 
+		/// it cannot already exist on another vehicle
+		/// </summary>
+		/// <param name="vehicle"></param>
+		/// <returns>True if the LicensePlace is null or does not already exist; 
+		/// otherwise, it returns false.</returns>
+		private bool IsLicensePlateUniqueIfNotNull(Vehicle vehicle) {
+			if (vehicle.LicensePlate == null)
+				return true;
+			return db.Vehicles.SingleOrDefault(v => v.LicensePlate == vehicle.LicensePlate) == null;
+		}
+		/// <summary>
+		/// This routine checks whether the VIN field that will be added or
+		/// changed is unique. It is ok if it is null, but if there is a value, 
+		/// it cannot already exist on another vehicle
+		/// </summary>
+		/// <param name="vehicle"></param>
+		/// <returns>True if the VIN is null or does not already exist; 
+		/// otherwise, it returns false.</returns>
+		private bool IsVinUniqueIfNotNull(Vehicle vehicle) {
+			if (vehicle.VIN == null)
+				return true;
+			return db.Vehicles.SingleOrDefault(v => v.VIN == vehicle.VIN) == null;
 		}
 
 		[HttpPost]
 		[ActionName("Create")]
 		public JsonResponse PutVehicle([FromBody] Vehicle vehicle) {
 			if (vehicle == null)
-				return new JsonResponse { Message = "Parameter vehicle cannot be null" };
+				return new JsonResponse { Code = -2, Message = "Parameter vehicle cannot be null" };
 			if (!ModelState.IsValid)
-				return new JsonResponse { Message = "ModelState invalid", Error = ModelState };
+				return new JsonResponse { Code = -1, Message = "ModelState invalid", Error = ModelState };
+			if(!AllFieldsAreNullOrUnique(vehicle)) {
+				return new JsonResponse { Code = -2, Message = "ERROR: VIN or LicensePlate is not unique", Error = vehicle };
+			}
 			// add the asset first
 			var asset = db.Assets.Add(vehicle.Asset);
 			db.SaveChanges(); // so the asset exists for the vehicle
@@ -60,14 +97,17 @@ namespace Ams2.Controllers {
 		[ActionName("Change")]
 		public JsonResponse PostVehicle([FromBody] Vehicle vehicle) {
 			if (vehicle == null)
-				return new JsonResponse { Message = "Parameter vehicle cannot be null" };
+				return new JsonResponse { Code = -2, Message = "Parameter vehicle cannot be null" };
 			//vehicle.Asset.Address = null;
 			//vehicle.Asset.Department = null;
 			//vehicle.Asset.Category = null;
 			//vehicle.Asset.User = null;
 			ClearAssetVirtuals(vehicle);
 			if (!ModelState.IsValid)
-				return new JsonResponse { Message = "ModelState invalid", Error = ModelState };
+				return new JsonResponse { Code = -1, Message = "ModelState invalid", Error = ModelState };
+			if (!AllFieldsAreNullOrUnique(vehicle)) {
+				return new JsonResponse { Code = -2, Message = "ERROR: VIN or LicensePlate is not unique", Error = vehicle };
+			}
 			db.Entry(vehicle.Asset).State = System.Data.Entity.EntityState.Modified;
 			db.Entry(vehicle).State = System.Data.Entity.EntityState.Modified;
 			var resp = new JsonResponse { Message = "Vehicle Changed", Data = vehicle };
@@ -78,9 +118,9 @@ namespace Ams2.Controllers {
 		[ActionName("Remove")]
 		public JsonResponse DeleteVehicle([FromBody] Vehicle vehicle) {
 			if (vehicle == null)
-				return new JsonResponse { Message = "Parameter vehicle cannot be null" };
+				return new JsonResponse { Code = -2, Message = "Parameter vehicle cannot be null" };
 			if (!ModelState.IsValid)
-				return new JsonResponse { Message = "ModelState invalid", Error = ModelState };
+				return new JsonResponse { Code = -1, Message = "ModelState invalid", Error = ModelState };
 			//db.Entry(vehicle).State = System.Data.Entity.EntityState.Deleted;
 			db.Entry(vehicle.Asset).State = System.Data.Entity.EntityState.Deleted;
 			var resp = new JsonResponse { Message = "Vehicle Removed", Data = vehicle };
