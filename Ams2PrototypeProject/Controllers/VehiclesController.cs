@@ -22,6 +22,7 @@ namespace Ams2.Controllers {
 	public class VehiclesController : AmsWebApiController {
 
 		//private AmsDbContext db = new AmsDbContext();
+		enum CtrlMethod { Create, Edit };
 
 		[HttpGet]
 		[ActionName("List")]
@@ -44,8 +45,9 @@ namespace Ams2.Controllers {
 		/// </summary>
 		/// <param name="vehicle"></param>
 		/// <returns></returns>
-		private bool AllFieldsAreNullOrUnique(Vehicle vehicle) {
-			return IsLicensePlateUniqueIfNotNull(vehicle) && IsVinUniqueIfNotNull(vehicle);
+		private bool AllFieldsAreNullOrUnique(Vehicle vehicle, CtrlMethod method) {
+			return IsLicensePlateUniqueIfNotNull(vehicle, method)
+				/* && IsVinUniqueIfNotNull(vehicle, method) */;
 		}
 		/// <summary>
 		/// This routine checks whether the licenseplate field that will be added or
@@ -55,10 +57,23 @@ namespace Ams2.Controllers {
 		/// <param name="vehicle"></param>
 		/// <returns>True if the LicensePlace is null or does not already exist; 
 		/// otherwise, it returns false.</returns>
-		private bool IsLicensePlateUniqueIfNotNull(Vehicle vehicle) {
+		private bool IsLicensePlateUniqueIfNotNull(Vehicle vehicle, CtrlMethod method) {
 			if (vehicle.LicensePlate == null)
 				return true;
-			return db.Vehicles.SingleOrDefault(v => v.LicensePlate == vehicle.LicensePlate) == null;
+			var db1 = new AmsDbContext();
+			var vehicleDb = db1.Vehicles.SingleOrDefault(v => v.LicensePlate == vehicle.LicensePlate);
+			// if creating a new vehicle and we find another vehicle with the same
+			// LicensePlate, must cause the create to fail
+			if (method == CtrlMethod.Create && vehicleDb != null)
+				return false;
+			// if editing an existing vehicle and we find a vehicle with the same
+			// LicensePlate but it has a different primary key, must cause the 
+			// edit to fail
+			if (method == CtrlMethod.Edit)
+				if (vehicleDb != null && vehicleDb.Id != vehicle.Id)
+					return false;
+			// otherwise, the create/edit is ok
+			return true;
 		}
 		/// <summary>
 		/// This routine checks whether the VIN field that will be added or
@@ -68,10 +83,22 @@ namespace Ams2.Controllers {
 		/// <param name="vehicle"></param>
 		/// <returns>True if the VIN is null or does not already exist; 
 		/// otherwise, it returns false.</returns>
-		private bool IsVinUniqueIfNotNull(Vehicle vehicle) {
+		private bool IsVinUniqueIfNotNull(Vehicle vehicle, CtrlMethod method) {
 			if (vehicle.VIN == null)
 				return true;
-			return db.Vehicles.SingleOrDefault(v => v.VIN == vehicle.VIN) == null;
+			var vehicleDb = db.Vehicles.SingleOrDefault(v => v.VIN == vehicle.VIN);
+			// if creating a new vehicle and we find another vehicle with the same
+			// VIN, must cause the create to fail
+			if (method == CtrlMethod.Create && vehicleDb != null)
+				return false;
+			// if editing an existing vehicle and we find a vehicle with the same
+			// VIN but it has a different primary key, must cause the 
+			// edit to fail
+			if (method == CtrlMethod.Edit)
+				if (vehicleDb != null && vehicleDb.Id != vehicle.Id)
+					return false;
+			// otherwise, the create/edit is ok
+			return true;
 		}
 
 		[HttpPost]
@@ -81,7 +108,7 @@ namespace Ams2.Controllers {
 				return new JsonResponse { Code = -2, Message = "Parameter vehicle cannot be null" };
 			if (!ModelState.IsValid)
 				return new JsonResponse { Code = -1, Message = "ModelState invalid", Error = ModelState };
-			if(!AllFieldsAreNullOrUnique(vehicle)) {
+			if(!AllFieldsAreNullOrUnique(vehicle, CtrlMethod.Create)) {
 				return new JsonResponse { Code = -2, Message = "ERROR: VIN or LicensePlate is not unique", Error = vehicle };
 			}
 			// add the asset first
@@ -102,12 +129,13 @@ namespace Ams2.Controllers {
 			//vehicle.Asset.Department = null;
 			//vehicle.Asset.Category = null;
 			//vehicle.Asset.User = null;
+			if (!AllFieldsAreNullOrUnique(vehicle, CtrlMethod.Edit)) {
+				return new JsonResponse { Code = -2, Message = "ERROR: VIN or LicensePlate is not unique", Error = vehicle };
+			}
 			ClearAssetVirtuals(vehicle);
 			if (!ModelState.IsValid)
 				return new JsonResponse { Code = -1, Message = "ModelState invalid", Error = ModelState };
-			if (!AllFieldsAreNullOrUnique(vehicle)) {
-				return new JsonResponse { Code = -2, Message = "ERROR: VIN or LicensePlate is not unique", Error = vehicle };
-			}
+			vehicle.DateUpdated = DateTime.Now;
 			db.Entry(vehicle.Asset).State = System.Data.Entity.EntityState.Modified;
 			db.Entry(vehicle).State = System.Data.Entity.EntityState.Modified;
 			var resp = new JsonResponse { Message = "Vehicle Changed", Data = vehicle };
