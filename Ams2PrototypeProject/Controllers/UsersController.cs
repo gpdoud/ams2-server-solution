@@ -20,6 +20,12 @@ namespace Ams2.Controllers {
 		public JsonResponse LoginUser(string username, string password) {
 			if (username == null || password == null) return null;
 			var user = db.Users.SingleOrDefault(u => u.Username == username && u.Password == password);
+            if(user == null) {
+                return new JsonResponse {
+                    Code = -3,
+                    Message = "Username/Password combination not found"
+                };
+            }
 			return new JsonResponse(user);
 		}
 
