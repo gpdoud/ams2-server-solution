@@ -149,8 +149,12 @@ namespace Ams2.Controllers {
 				return new JsonResponse { Code = -2, Message = "Parameter vehicle cannot be null" };
 			if (!ModelState.IsValid)
 				return new JsonResponse { Code = -1, Message = "ModelState invalid", Error = ModelState };
-			//db.Entry(vehicle).State = System.Data.Entity.EntityState.Deleted;
-			db.Entry(vehicle.Asset).State = System.Data.Entity.EntityState.Deleted;
+            var v = db.Vehicles.Find(vehicle.Id);
+            var a = db.Assets.Find(vehicle.Asset.Id);
+            db.Vehicles.Remove(v);
+            db.Assets.Remove(a);
+
+            //db.Entry(vehicle.Asset).State = System.Data.Entity.EntityState.Deleted;
 			var resp = new JsonResponse { Message = "Vehicle Removed", Data = vehicle };
 			return SaveChanges(resp);
 		}
