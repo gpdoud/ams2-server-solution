@@ -358,3 +358,4 @@ C:\repos\ams2\ams2-server-solution\Ams2PrototypeProject\obj\Debug\ams2-server-pr
 C:\repos\ams2\ams2-server-solution\Ams2PrototypeProject\obj\Debug\ams2-server-project.csproj.CopyComplete
 C:\repos\ams2\ams2-server-solution\Ams2PrototypeProject\obj\Debug\Ams2Project.dll
 C:\repos\ams2\ams2-server-solution\Ams2PrototypeProject\obj\Debug\Ams2Project.pdb
+C:\repos\ams2\ams2-server-solution\Ams2PrototypeProject\obj\Debug\Ams2.Migrations.addedVehicleTitleNo.resources

@@ -275,6 +275,10 @@
     <Compile Include="Migrations\201808171501417_Equipment.SerialNumber changed to non-unique.Designer.cs">
       <DependentUpon>201808171501417_Equipment.SerialNumber changed to non-unique.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907081545092_added Vehicle.TitleNo.cs" />
+    <Compile Include="Migrations\201907081545092_added Vehicle.TitleNo.Designer.cs">
+      <DependentUpon>201907081545092_added Vehicle.TitleNo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\AmsDbContext.cs" />
@@ -323,6 +327,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\UpdateSite.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -414,6 +420,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808171501417_Equipment.SerialNumber changed to non-unique.resx">
       <DependentUpon>201808171501417_Equipment.SerialNumber changed to non-unique.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907081545092_added Vehicle.TitleNo.resx">
+      <DependentUpon>201907081545092_added Vehicle.TitleNo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
