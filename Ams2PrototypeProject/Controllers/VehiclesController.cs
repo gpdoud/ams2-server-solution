@@ -104,20 +104,25 @@ namespace Ams2.Controllers {
 		[HttpPost]
 		[ActionName("Create")]
 		public JsonResponse PutVehicle([FromBody] Vehicle vehicle) {
-			if (vehicle == null)
-				return new JsonResponse { Code = -2, Message = "Parameter vehicle cannot be null" };
-			if (!ModelState.IsValid)
-				return new JsonResponse { Code = -1, Message = "ModelState invalid", Error = ModelState };
-			if(!AllFieldsAreNullOrUnique(vehicle, CtrlMethod.Create)) {
-				return new JsonResponse { Code = -2, Message = "ERROR: VIN or LicensePlate is not unique", Error = vehicle };
-			}
-			// add the asset first
-			var asset = db.Assets.Add(vehicle.Asset);
-			db.SaveChanges(); // so the asset exists for the vehicle
-			vehicle.AssetId = asset.Id; // this gets the generated PK
-			db.Vehicles.Add(vehicle);
-			var resp = new JsonResponse { Message = "Vehicle Created", Data = vehicle };
-			return SaveChanges(resp);
+            try {
+                if(vehicle == null)
+                    return new JsonResponse { Code = -2, Message = "Parameter vehicle cannot be null" };
+                if(!ModelState.IsValid)
+                    return new JsonResponse { Code = -1, Message = "ModelState invalid", Error = ModelState };
+                if(!AllFieldsAreNullOrUnique(vehicle, CtrlMethod.Create)) {
+                    return new JsonResponse { Code = -2, Message = "ERROR: VIN or LicensePlate is not unique", Error = vehicle };
+                }
+                // add the asset first
+                var asset = db.Assets.Add(vehicle.Asset);
+                db.SaveChanges(); // so the asset exists for the vehicle
+                vehicle.AssetId = asset.Id; // this gets the generated PK
+                db.Vehicles.Add(vehicle);
+                var resp = new JsonResponse { Message = "Vehicle Created", Data = vehicle };
+                return SaveChanges(resp);
+            } catch (Exception ex) {
+                var resp = new JsonResponse { Code = -1, Message = ex.Message, Error = ex };
+                return resp;
+            }
 		}
 
 		[HttpPost]
