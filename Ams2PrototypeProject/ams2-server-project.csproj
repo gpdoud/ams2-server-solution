@@ -294,6 +294,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utility\JsonResponse.cs" />
     <Compile Include="Utility\LogLevelVals.cs" />
+    <Compile Include="ViewModels\EquipmentPrint.cs" />
+    <Compile Include="ViewModels\VehiclePrint.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />

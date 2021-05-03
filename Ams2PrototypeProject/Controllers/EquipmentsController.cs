@@ -1,5 +1,7 @@
 ﻿using Ams2.Models;
 using Ams2.Utility;
+using Ams2.ViewModels;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +16,17 @@ namespace Ams2.Controllers {
     public class EquipmentsController : AmsWebApiController {
 
         //private AmsDbContext db = new AmsDbContext();
+
+        [HttpGet]
+        [ActionName("ListByDepartment")]
+        public JsonResponse GetEquipmentsByDepartment(int? id) {
+            var equipments = db.Equipments.Where(e => e.Asset.DepartmentId == id).ToList();
+            var equipmentPrints = new List<EquipmentPrint>();
+            foreach(var e in equipments) {
+                equipmentPrints.Add(new EquipmentPrint(e));
+            }
+            return new JsonResponse { Data = equipmentPrints };
+        }
 
         [HttpGet]
         [ActionName("List")]
