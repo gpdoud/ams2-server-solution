@@ -1,5 +1,7 @@
 ﻿using Ams2.Models;
 using Ams2.Utility;
+using Ams2.ViewModels;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +25,17 @@ namespace Ams2.Controllers {
 
         //private AmsDbContext db = new AmsDbContext();
         enum CtrlMethod { Create, Edit };
+
+        [HttpGet]
+        [ActionName("ListByDepartment")]
+        public JsonResponse GetVehiclesByDepartment(int? id) {
+            var vehicles = db.Vehicles.Where(v => v.Asset.DepartmentId == id).ToList();
+            var vehiclePrints = new List<VehiclePrint>();
+            foreach(var v in vehicles) {
+                vehiclePrints.Add(new VehiclePrint(v));
+            }
+            return new JsonResponse { Data = vehiclePrints };
+        }
 
         [HttpGet]
         [ActionName("List")]
