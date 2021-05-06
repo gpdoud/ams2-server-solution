@@ -9,19 +9,15 @@ namespace Ams2.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(Ams2.Models.AmsDbContext context)
         {
-			//  This method will be called after migrating to the latest version.
+            //  This method will be called after migrating to the latest version.
 
-			//  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-			//  to avoid creating duplicate seed data.
-			context.Addresses.AddOrUpdate(a =>
-				a.Name,
-				new Models.Address("Corp", "Corporate Office", "150 Parkway Dr.", "Suite 150", null, "Mason", "OH", "45040")
-			);
+            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
+            //  to avoid creating duplicate seed data.
         }
     }
 }

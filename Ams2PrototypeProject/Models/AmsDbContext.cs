@@ -9,6 +9,7 @@ namespace Ams2.Models {
 	public class AmsDbContext : DbContext {
 
 		public AmsDbContext() : base("name=AmsDb") {
+			Database.SetInitializer(new MigrateDatabaseToLatestVersion<AmsDbContext, Migrations.Configuration>());
 		}
 
 		public DbSet<Address> Addresses { get; set; }

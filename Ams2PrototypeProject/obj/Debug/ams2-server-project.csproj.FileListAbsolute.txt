@@ -481,3 +481,4 @@ C:\repos\ams\ams2-server-solution\Ams2PrototypeProject\obj\Debug\ams2-server-pro
 C:\repos\ams\ams2-server-solution\Ams2PrototypeProject\obj\Debug\ams2-server-project.csproj.CopyComplete
 C:\repos\ams\ams2-server-solution\Ams2PrototypeProject\obj\Debug\Ams2Project.dll
 C:\repos\ams\ams2-server-solution\Ams2PrototypeProject\obj\Debug\Ams2Project.pdb
+C:\repos\ams\ams2-server-solution\Ams2PrototypeProject\obj\Debug\ams2-server-project.csprojAssemblyReference.cache
