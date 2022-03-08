@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <setParameter name="IIS Web Application Name" value="Default Web Site/ams" />
+  <setParameter name="AmsDb-Web.config Connection String" value="server=localhost\SQLEXPRESS;database=AMS2;uid=ams;pwd=ams;" />
+  <setParameter name="AmsDb_DatabasePublish-Web.config Connection String" value="AmsDb_DatabasePublish.ConnetionString" />
+</parameters>
